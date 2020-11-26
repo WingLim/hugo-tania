@@ -71,37 +71,49 @@ header {
     }
 }
 
-@for $i from 1 through 6 {
-    h#{$i} {
-        .anchor {
-            stroke: var(--link-color);
-            stroke-width: 1px;
-            fill: var(--link-color);
-            font-weight: 700;
-            left: -0.25rem;
-            border-width: 0;
-            float: left;
-            line-height: 1;
-            margin-left: -20px;
-            padding-right: 4px;
-        
-            .icon {
-                visibility: hidden;
-            }
-        }
+.article-post {
+    margin-bottom: 2rem;
+
+    a {
+        box-shadow: 0px -2px 0px rgba(189, 195, 199, 0.5) inset;
+        transition: all .3s ease;
 
         &:hover {
-            .anchor .icon {
-              visibility: visible;
+            box-shadow: 0px -10px 0px rgba(189, 195, 199, 0.7) inset;
+        }
+    }
+
+    @for $i from 1 through 6 {
+        h#{$i} {
+            .anchor {
+                stroke: var(--link-color);
+                stroke-width: 1px;
+                fill: var(--link-color);
+                font-weight: 700;
+                left: -0.25rem;
+                border-width: 0;
+                float: left;
+                line-height: 1;
+                margin-left: -20px;
+                padding-right: 4px;
+                box-shadow: none;
+                transition: none;
+            
+                .icon {
+                    visibility: hidden;
+                }
+            }
+    
+            &:hover {
+                .anchor {
+                    box-shadow: none;
+                    .icon {
+                        visibility: visible;
+                    }
+                }
             }
         }
     }
-}
-
-
-
-.article-post {
-    margin-bottom: 2rem;
 }
 
 @media screen and (min-width: 800px) {
