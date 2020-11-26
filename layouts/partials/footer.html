@@ -16,6 +16,6 @@
     </script>
     <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/tex-mml-chtml.js" integrity="sha256-HGLuEfFcsUJGhvB8cQ8nr0gai9EucOOaIxFw7qxmd+w=" crossorigin="anonymous"></script>
     {{- end }}
-    <script async src="{{ relURL "/js/switchDarkMode.js" }}"></script>
-    <script async src="{{ relURL "/js/features.js" }}"></script>
+    {{ $features := resources.Get "js/features.js" | minify | fingerprint }}
+    <script async src="{{ $features.RelPermalink }}"></script>
 </footer>
