@@ -1,0 +1,12 @@
+<footer class="footer flex">
+    <section class="container">
+        <nav class="footer-links">
+            {{ range .Site.Menus.footer }}
+            <a href="{{ .URL | relURL }}">{{ .Name }}</a>
+            {{ end }}
+        </nav>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js@latest"></script>
+    <script async src="{{ relURL "/js/switchDarkMode.js" }}"></script>
+    <script async src="{{ relURL "/js/features.js" }}"></script>
+</footer>

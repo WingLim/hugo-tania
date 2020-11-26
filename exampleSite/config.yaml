@@ -1,0 +1,23 @@
+title: "Hugo Tania"
+theme: "hugo-tania"
+
+params:
+  titleEmoji: '😎'
+  socialOptions:
+    github: 
+    twitter: 
+
+menu:
+  header:
+    - name: Articles
+      url: "/articles/"
+  footer:
+    - name: RSS
+      url: "/index.xml"
+
+markup:
+  highlight:
+    noClasses: false
+  goldmark:
+    renderer:
+      unsafe: true

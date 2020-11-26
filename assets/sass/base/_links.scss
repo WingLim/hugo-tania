@@ -1,0 +1,27 @@
+/* Links */
+
+a {
+    color: var(--heading-color);
+    text-decoration: none;
+    font-weight: 600;
+    border-bottom: 3px solid #b9cdfb;
+    border-color: var(--border-color);
+
+    &:hover {
+        color: var(--a-hover-color);
+        border-bottom: 3px solid #96b4f9;
+    }
+
+    &.image-link {
+        border-width: 0;
+    }
+
+    code[class*='language-'] {
+        color: var(--link-color) !important;
+
+        &:hover {
+            background: var(--link-color) !important;
+            color: white !important;
+        }
+    }
+}
