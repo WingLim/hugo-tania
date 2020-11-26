@@ -18,6 +18,7 @@ menu:
 markup:
   highlight:
     noClasses: false
+    lineNos: true
   goldmark:
     renderer:
       unsafe: true
