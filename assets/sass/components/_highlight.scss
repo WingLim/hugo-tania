@@ -10,17 +10,22 @@ code, pre {
     font-size: $code-font-size;
     font-family: $code-font-family;
     background: $code-background;
-  }
+}
+
+:not(pre) > code {
+    color: var(--inline-code-color);
+    background: var(--inline-code-background);
+}
   
-  code {
+code {
     padding: 3px 5px;
     border-radius: 4px;
     color: $code-color;
-  }
+}
   
-  pre > code {
+pre > code {
     display: block;
-  }
+}
 
 .highlight > .chroma {
     margin: 1em 0;
