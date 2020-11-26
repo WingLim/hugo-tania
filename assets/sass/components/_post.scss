@@ -71,18 +71,34 @@ header {
     }
 }
 
-.anchor.before {
-    stroke: var(--link-color);
-    stroke-width: 1px;
-    fill: var(--link-color);
-    font-weight: 700;
-    left: -0.25rem;
-    border-width: 0;
+@for $i from 1 through 6 {
+    h#{$i} {
+        .anchor {
+            stroke: var(--link-color);
+            stroke-width: 1px;
+            fill: var(--link-color);
+            font-weight: 700;
+            left: -0.25rem;
+            border-width: 0;
+            float: left;
+            line-height: 1;
+            margin-left: -20px;
+            padding-right: 4px;
+        
+            .icon {
+                visibility: hidden;
+            }
+        }
+
+        &:hover {
+            .anchor .icon {
+              visibility: visible;
+            }
+        }
+    }
 }
 
-.article-post .anchor.before {
-    top: 1rem;
-}
+
 
 .article-post {
     margin-bottom: 2rem;
