@@ -1,4 +1,4 @@
-$code-font-size: 0.9em !default;
+$code-font-size: 0.9rem !default;
 $code-color: #f8f8f2 !default;
 $code-background: #171f2e !default;
 $gray: #cacaca !default;
@@ -97,7 +97,7 @@ pre > code {
 
     /* Error */  .err { color: #960050; background-color: #1e0010 }
     /* LineHighlight */  .hl { display: block; width: 100%;background-color: black }
-    /* LineNumbersTable */  .lnt { padding: 0 0.4em 0 0.4em;color: #7f7f7f }
+    /* LineNumbersTable */  .lnt { color: #7f7f7f }
     /* LineNumbers */  .ln { padding: 0 0.4em 0 0.4em;color: #7f7f7f }
     /* Keyword */  .k { color: #66d9ef }
     /* KeywordConstant */  .kc { color: #66d9ef }

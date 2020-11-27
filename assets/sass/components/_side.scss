@@ -9,7 +9,7 @@
     margin-right: calc(-200px - 2em);
 
     p {
-        font-size: .9em;
+        font-size: .9rem;
     }
 }
 
@@ -24,7 +24,7 @@
 
 .bg-number {
     background: var(--light-background);
-    font-size: .9em;
+    font-size: .9rem;
     color: var(--font-color);
     text-decoration: none;
     padding: 1px 5px;
@@ -50,8 +50,8 @@
     .note-ref:hover ~ .side {
         display: inline-block;
         position: absolute;
-        margin-left: 1em;
-        padding: .5em;
+        margin-left: 1rem;
+        padding: .5rem;
         box-sizing: content-box;
     }
 }
