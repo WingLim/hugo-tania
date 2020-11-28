@@ -1,3 +1,5 @@
+baseurl: "https://example.com"
+languageCode: "en-us"
 title: "Hugo Tania"
 theme: "hugo-tania"
 
