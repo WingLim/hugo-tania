@@ -1,16 +1,16 @@
 renderFootnotes = function () {
-    var removeEl = function (el) {
+    const removeEl = (el) => {
         if (!el) return;
         el.remove ? el.remove() : el.parentNode.removeChild(el);
     };
 
-    var insertAfter = function (target, sib) {
+    const insertAfter = (target, sib) => {
         target.after ? target.after(sib) : (
             target.parentNode.insertBefore(sib, target.nextSibling)
         );
     };
 
-    var insideOut = function (el) {
+    const insideOut = (el) => {
         var p = el.parentNode, x = el.innerHTML,
             c = document.createElement('div');  // a tmp container
         insertAfter(p, c);
@@ -55,9 +55,11 @@ renderFootnotes = function () {
 
 renderAnchor = function () {
     for (let num = 1; num <= 6; num++) {
+        // search h1-h6
         const headers = document.querySelectorAll('.article-post>h' + num);
         for (let i = 0; i < headers.length; i++) {
             const header = headers[i];
+            // add anchor before h1-h6
             header.innerHTML = `<a href="#${header.id}" class="anchor"><svg class="icon" aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>${header.innerHTML}`;
         }
     }
@@ -65,7 +67,7 @@ renderAnchor = function () {
 
 switchDarkMode = function () {
     const rootElement = document.documentElement; // <html>
-    const darkModeStorageKey = 'user-color-scheme'; // 作为 localStorage 的 key
+    const darkModeStorageKey = 'user-color-scheme'; // use as localStorage's key
     const rootElementDarkModeAttributeName = 'data-user-color-scheme';
     const darkModeTogglebuttonElement = document.getElementById('dark-mode-button');
 
@@ -85,12 +87,12 @@ switchDarkMode = function () {
         try {
             return localStorage.getItem(k);
         } catch (e) {
-            return null // 与 localStorage 中没有找到对应 key 的行为一致
+            return null // the same as localStorage.getItem() get nothing
         }
     }
 
     const getModeFromCSSMediaQuery = () => {
-        // 使用 matchMedia API 的写法会优雅的多
+        // use matchMedia API
         return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
     }
 
@@ -109,19 +111,20 @@ switchDarkMode = function () {
         'light': '🌙'
     }
 
-    const setModeButtonIcon = (current) => {
-        darkModeTogglebuttonElement.innerHTML = modeIcons[current]
+    const setModeButtonIcon = (mode) => {
+        darkModeTogglebuttonElement.innerHTML = modeIcons[mode]
     }
 
     const applyCustomDarkModeSettings = (mode) => {
-        // 接受从「开关」处传来的模式，或者从 localStorage 读取
+        // receive user's operation or get previous mode from localStorage
         const currentSetting = mode || getLS(darkModeStorageKey);
 
         if (currentSetting === getModeFromCSSMediaQuery()) {
-            // 当用户自定义的显示模式和 prefers-color-scheme 相同时重置、恢复到自动模式
+            // When the user selected mode equal prefers-color-scheme 
+            // reset and restored to automatic mode
             nowMode = getModeFromCSSMediaQuery()
             resetRootDarkModeAttributeAndLS();
-        } else if (validColorModeKeys[currentSetting]) { // 相比 Array#indexOf，这种写法 Uglify 后字节数更少
+        } else if (validColorModeKeys[currentSetting]) {
             nowMode = currentSetting
             rootElement.setAttribute(rootElementDarkModeAttributeName, currentSetting);
         } else {
@@ -142,27 +145,27 @@ switchDarkMode = function () {
         let currentSetting = getLS(darkModeStorageKey);
 
         if (validColorModeKeys[currentSetting]) {
-            // 从 localStorage 中读取模式，并取相反的模式
+            // get mode from localStorage and set the opposite
             currentSetting = invertDarkModeObj[currentSetting];
         } else if (currentSetting === null) {
-            // localStorage 中没有相关值，或者 localStorage 抛了 Error
-            // 从 CSS 中读取当前 prefers-color-scheme 并取相反的模式
+            // if get null from localStorage
+            // get mode from prefers-color-scheme and set the opposite
             currentSetting = invertDarkModeObj[getModeFromCSSMediaQuery()];
         } else {
-            // 不知道出了什么幺蛾子，比如 localStorage 被篡改成非法值
-            return; // 直接 return;
+            // get anything error, return
+            return;
         }
-        // 将相反的模式写入 localStorage
+        // set opposite mode into localStorage
         setLS(darkModeStorageKey, currentSetting);
 
         return currentSetting;
     }
 
-    // 当页面加载时，将显示模式设置为 localStorage 中自定义的值（如果有的话）
+    // when page loaded set page mode
     applyCustomDarkModeSettings();
 
     darkModeTogglebuttonElement.addEventListener('click', () => {
-        // 当用户点击「开关」时，获得新的显示模式、写入 localStorage、并在页面上生效
+        // handle user click switch dark mode button
         applyCustomDarkModeSettings(toggleCustomDarkMode());
     })
 }();
