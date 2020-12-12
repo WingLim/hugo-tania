@@ -12,8 +12,8 @@ code, pre {
 }
 
 :not(pre) > code {
-    color: var(--inline-code-color);
-    background: var(--inline-code-background);
+    color: var(--dark-font-color);
+    background: var(--light-background);
 }
   
 code {
