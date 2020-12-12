@@ -53,16 +53,6 @@ renderFootnotes = function () {
     });
 }();
 
-renderChroma = function () {
-    const blocks = document.querySelectorAll('.highlight > .chroma');
-    for (let i = 0; i < blocks.length; i++) {
-        const block = blocks[i];
-        const afterHighLight = block.querySelector('pre.chroma > code[data-lang]');
-        const lang = afterHighLight ? afterHighLight.className : '';
-        block.className += ' ' + lang;
-    }
-}();
-
 renderAnchor = function () {
     for (let num = 1; num <= 6; num++) {
         const headers = document.querySelectorAll('.article-post>h' + num);

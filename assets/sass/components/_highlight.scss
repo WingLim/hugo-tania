@@ -28,40 +28,36 @@ pre > code {
 }
 
 .highlight > .chroma {
-    margin: 1em 0;
+    margin: 0;
+    padding: 34px 7px 6px;
     border-radius: 5px;
     overflow-x: auto;
     box-shadow: 1px 1px 2px rgba(0,0,0,0.125);
     position: relative;
     background: $code-background;
-  
-    code {
-      padding: 0;
-    }
-  
-    table {
-      position: relative;
-      border: none;
-  
-      &::after {
+
+    code[data-lang]::before {
         position: absolute;
         top: 0;
         right: 0;
         left: 0;
         padding: 2px 7px;
+        width: 100%;
+        height: 30px;
         font-size: $code-font-size;
+        line-height: 1.9;
         font-weight: bold;
         color: #b1b1b1;
         background: darken($code-background, 3%);
-        content: 'Code';
+        content: attr(data-lang);
       }
+  
+    table {
+      position: relative;
+      border: none;
     }
   
-    @each $sign, $text in $code-type-list {
-      &.#{$sign} > table::after {
-        content: $text;
-      }
-    }
+    
   
     .lntd {
       // Fix code block null line height and
