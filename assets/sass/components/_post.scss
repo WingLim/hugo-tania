@@ -83,6 +83,10 @@ header {
         }
     }
 
+    code {
+        overflow-x: auto;
+    }
+
     @for $i from 1 through 6 {
         h#{$i} {
             .anchor {
@@ -98,12 +102,12 @@ header {
                 padding-right: 4px;
                 box-shadow: none;
                 transition: none;
-            
+
                 .icon {
                     visibility: hidden;
                 }
             }
-    
+
             &:hover {
                 .anchor {
                     box-shadow: none;
