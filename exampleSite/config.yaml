@@ -2,12 +2,14 @@ baseurl: "https://example.com"
 languageCode: "en-us"
 title: "Hugo Tania"
 theme: "hugo-tania"
+# uncomment if you want use disqus
+# disqusShortname: yourShortName
 
 params:
-  titleEmoji: '😎'
+  titleEmoji: "😎"
   socialOptions:
-    github: 
-    twitter: 
+    github:
+    twitter:
 
 menu:
   header:
