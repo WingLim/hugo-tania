@@ -14,7 +14,7 @@
         <section>
             {{ range $pages.GroupByDate "2006" }}
             <section>
-                <h2>2020</h2>
+                <h2>{{ .Key }}</h2>
                 <div class="posts">
                     {{ range .Pages }}
                     <div class="post">
