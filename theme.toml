@@ -5,7 +5,7 @@ name = "Tania"
 license = "MIT"
 licenselink = "https://github.com/WingLim/hugo-tania/blob/master/LICENSE"
 description = "A simple theme for bloggers"
-homepage = "https://hugo-tanhia.netlify.app"
+homepage = "https://github.com/WingLim/hugo-tania"
 tags = [
     "blog",
     "responsive",
