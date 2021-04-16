@@ -1,3 +1,8 @@
+{{- $pages := where .Site.RegularPages "Type" "in" .Site.Params.mainSections -}}
+{{- $limit := .Site.Config.Services.RSS.Limit -}}
+{{- if ge $limit 1 -}}
+{{- $pages = $pages | first $limit -}}
+{{- end -}}
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>{{ if eq  .Title  .Site.Title }}{{ .Site.Title }}{{ else }}{{ with .Title }}{{.}} on {{ end }}{{ .Site.Title }}{{ end }}</title>
@@ -9,19 +14,21 @@
     <webMaster>{{.}}{{ with $.Site.Author.name }} ({{.}}){{end}}</webMaster>{{end}}{{ with .Site.Copyright }}
     <copyright>{{.}}</copyright>{{end}}{{ if not .Date.IsZero }}
     <lastBuildDate>{{ .Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</lastBuildDate>{{ end }}
-    <atom:link href="{{.Permalink}}" rel="self" type="application/rss+xml" />
+    {{- with .OutputFormats.Get "RSS" -}}
+      {{ printf "<atom:link href=%q rel=\"self\" type=%q />" .Permalink .MediaType | safeHTML }}
+    {{- end -}}
 
-    {{ range first 30 .Data.Pages }}
-      <item>
-        <title>{{ .Title }}</title>
-        <link>{{ .Permalink }}</link>
-        <pubDate>{{ .Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>
-        {{ with .Params.author }}<author>{{.}}</author>{{end}}
-        <guid>{{ .Permalink }}</guid>
-        <description>
-          {{ (replace .Content "" "") | html }}
-        </description>
-      </item>
+    {{ range $pages }}
+    <item>
+    <title>{{ .Title }}</title>
+    <link>{{ .Permalink }}</link>
+    <pubDate>{{ .Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>
+    {{ with .Params.author }}<author>{{.}}</author>{{end}}
+    <guid>{{ .Permalink }}</guid>
+    <description>
+        {{ (replace .Content "" "") | html }}
+    </description>
+    </item>
     {{ end }}
   </channel>
 </rss>
