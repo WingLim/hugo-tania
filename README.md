@@ -75,6 +75,20 @@ layout: "archives"
 ---
 ```
 
+### Article
+
+For enable math formula render, add `mathjax: true` in your article head, like:
+
+```markdown
+---
+title: Title
+mathjax: true
+---
+
+Some content...
+
+```
+
 ## Thanks to
 - [你好黑暗，我的老朋友 —— 为网站添加用户友好的深色模式支持](https://blog.skk.moe/post/hello-darkmode-my-old-friend/)
 - [Footnotes, citations, and sidenotes](https://prose.yihui.org/about/#footnotes-citations-and-sidenotes)
