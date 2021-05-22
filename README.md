@@ -77,12 +77,16 @@ layout: "archives"
 
 ### Article
 
-For enable math formula render, add `mathjax: true` in your article head, like:
+#### Enable math formula render
+
+For enable math formula render, add `katex: true` or `mathjax: true` in your article head, like:
+
+Notice: You should enable only one `katex` or `mathjax` in a same time.
 
 ```markdown
 ---
 title: Title
-mathjax: true
+katex: true
 ---
 
 Some content...
