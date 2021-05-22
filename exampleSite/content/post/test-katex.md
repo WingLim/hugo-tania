@@ -1,9 +1,9 @@
 ---
 author: Hugo Authors
-title: Math Typesetting with MathJax
-date: 2019-03-08
-description: A brief guide to setup MathJax
-mathjax: true
+title: Katex support
+date: 2021-05-22
+description: "KaTeX is a fast, easy-to-use JavaScript library for TeX math rendering on the web."
+katex: true
 ---
 
 The following
@@ -14,7 +14,9 @@ Is an integral
 
 $$ \varphi = 1+\frac{1} {1+\frac{1} {1+\frac{1} {1+\cdots} } } $$
 
-Enable MathJax in the config file by setting the `mathjax` param to `true`. This will import the necessary MathJax CSS/JS. 
+Enable Katex in the config file by setting the `katex` param to `true`. This will import the necessary Katex CSS/JS. 
+
+See the online reference of [supported TeX functions](https://katex.org/docs/supported.html). 
 
 ```latex
 Inline math: $ \varphi = \dfrac{1+\sqrt5}{2}= 1.6180339887… $
