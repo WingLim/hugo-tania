@@ -14,6 +14,12 @@
                     {{ partial (print "svgs/social/" $name ".svg") (dict "width" 25 "height" 25) }}
                 </a>
                 {{ end }}
+                {{ if (and $path (eq $name "email")) }}
+                <a href="mailto:{{ $path | safeURL }}" target="_blank" rel="noreferrer" title="{{ $path }}"
+                    aria-label="{{ $name }}">
+                    {{ partial (print "svgs/social/" $name ".svg") (dict "width" 25 "height" 25) }}
+                </a>
+                {{ end }}
                 {{ end }}
             </div>
         </div>
