@@ -7,8 +7,8 @@ paginate: 6
 params:
   titleEmoji: '😎'
   socialOptions:
-    github: 
-    twitter: 
+    github: https://github.com/WingLim
+    email: email@example.com
 
 menu:
   header:
