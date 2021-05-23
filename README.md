@@ -47,12 +47,14 @@ Account with icon can set as below:
 ```yaml
 socialOptions:
     dev-to:
+    email:
     facebook:
     github:
     instagram:
     linkedin:
     medium:
     stack-overflow:
+    steam:
     telegram:
     twitter:
     twitch:
