@@ -13,10 +13,23 @@
     }
 }
 
+.footnotes hr {
+  border: none;
+  border-top: 1px solid var(--border);
+}
+
+.footnote-ref {
+  box-shadow: none !important;
+}
+
+.footnote-backref {
+  box-shadow: none !important;
+}
+
 .note-ref {
     cursor: pointer;
     border: none;
-    box-shadow: none !important;
+    
 
     &:hover {
         box-shadow: none;
