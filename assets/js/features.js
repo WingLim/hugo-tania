@@ -2,7 +2,6 @@
   let enableFootnotes = false
   if (d.currentScript) {
     enableFootnotes = d.currentScript.dataset['enableFootnotes'] ==  'true'
-    console.log(enableFootnotes)
   }
   renderFootnotes = function () {
     const removeEl = (el) => {
