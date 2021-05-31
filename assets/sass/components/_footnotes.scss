@@ -18,9 +18,14 @@
     }
 }
 
-.footnotes hr {
-  border: none;
-  border-top: 1px solid var(--border);
+.footnotes {
+  ol li p {
+    margin: 0;
+  }
+  hr {
+    border: none;
+    border-top: 1px solid var(--border);
+  }
 }
 
 .footnote-ref {
