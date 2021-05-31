@@ -9,6 +9,7 @@ params:
   socialOptions:
     github: https://github.com/WingLim
     email: email@example.com
+  enableFootnotes: true
 
 menu:
   header:
