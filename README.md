@@ -61,6 +61,11 @@ socialOptions:
     whatsapp:
 ```
 
+If you want to disable the float footnotes, add below params.
+```yaml
+enableFootnotes: false
+```
+
 ### Layout
 
 `articles` layout is for showing all articles you write.

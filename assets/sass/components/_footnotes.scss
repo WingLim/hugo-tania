@@ -1,23 +1,48 @@
 .side {
     width: 200px;
     margin: 0 auto;
+
+    p {
+      margin: 0;
+    }
 }
 
 .side-right {
     float: right;
     clear: right;
     margin-right: calc(-200px - 2em);
+    background-color: #fff;
 
     p {
         font-size: .9rem;
     }
 }
 
+.footnotes {
+  ol li p {
+    margin: 0;
+  }
+  hr {
+    border: none;
+    border-top: 1px solid var(--border);
+  }
+}
+
+.footnote-ref {
+  box-shadow: none !important;
+}
+
+.footnote-backref {
+  box-shadow: none !important;
+}
+
 .note-ref {
     cursor: pointer;
     border: none;
+    
 
     &:hover {
+        box-shadow: none;
         border: none;
     }
 }

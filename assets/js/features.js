@@ -1,4 +1,9 @@
-renderFootnotes = function () {
+(function(d){
+  let enableFootnotes = false
+  if (d.currentScript) {
+    enableFootnotes = d.currentScript.dataset['enableFootnotes'] ==  'true'
+  }
+  renderFootnotes = function () {
     const removeEl = (el) => {
         if (!el) return;
         el.remove ? el.remove() : el.parentNode.removeChild(el);
@@ -51,7 +56,11 @@ renderFootnotes = function () {
         if (items.length !== 2 || items[0].tagName !== 'HR' || items[1].tagName !== 'OL') return;
         items[1].childElementCount === 0 && removeEl(fn);
     });
-}();
+  };
+  if (enableFootnotes) {
+    renderFootnotes()
+  }
+})(document);
 
 renderAnchor = function () {
     for (let num = 1; num <= 6; num++) {
