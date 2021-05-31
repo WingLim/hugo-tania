@@ -1,12 +1,17 @@
 .side {
     width: 200px;
     margin: 0 auto;
+
+    p {
+      margin: 0;
+    }
 }
 
 .side-right {
     float: right;
     clear: right;
     margin-right: calc(-200px - 2em);
+    background-color: #fff;
 
     p {
         font-size: .9rem;
