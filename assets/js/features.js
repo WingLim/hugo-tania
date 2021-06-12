@@ -1,3 +1,10 @@
+let show = function (elem) {
+    elem.style.display = 'block';
+};
+let hide = function (elem) {
+    elem.style.display = 'none';
+};
+
 (function (d) {
     let enableFootnotes = false
     if (d.currentScript) {
@@ -179,9 +186,7 @@ switchDarkMode = function () {
     })
 }();
 
-
-const searchInput = document.getElementById('search-query');
-initSearch = function () {
+initFuse = function () {
     const fuseOptions = {
         shouldSort: true,
         includeMatches: true,
@@ -199,52 +204,57 @@ initSearch = function () {
         ]
     };
 
-    const searchResults = document.getElementById('search-results')
-    const articles = document.getElementById('articles')
-    searchInput.addEventListener("input", function () {
-        let value = searchInput.value
-        executeSearch(value);
-    })
-
-    function executeSearch(value) {
-        if (value.length != 0) {
-            hide(articles)
-            show(searchResults)
-        } else {
-            hide(searchResults)
-            show(articles)
+    fetch('/index.json')
+    .then(function (response) {
+        if (response.status !== 200) {
+            console.error('[' + response.status + ']Error:', response.statusText);
+            return;
         }
+        response.json().then(function (pages) {
+            let fuse = new Fuse(pages, fuseOptions);
+            window.fuse = fuse;
+        })
+        
+    })
+    .catch(function (err) {
+        console.error('[Fetch]Error:', err);
+    });
+}()
 
-        fetch('/index.json').then(function (response) {
-            if (response.status !== 200) {
-                console.error('[' + response.status + ']Error:', response.statusText);
-                return;
-            }
-            response.json().then(function (pages) {
-                var fuse = new Fuse(pages, fuseOptions);
-                var result = fuse.search(value);
-                if (result.length > 0) {
-                    populateResults(result);
-                } else {
-                    searchResults.innerHTML = '<p class=\"search-results-empty\">Sorry, nothing matched that search.</p>';
-                }
-            })
-                .catch(function (err) {
-                    console.error('[Fetch]Error:', err);
-                });
-        });
+const searchInput = document.getElementById('search-query');
+const searchResults = document.getElementById('search-results')
+const articles = document.getElementById('articles')
+searchInput.addEventListener("input", function () {
+    let value = searchInput.value
+    executeSearch(value);
+})
+
+executeSearch = function(value) {
+    if (value.length != 0) {
+        hide(articles)
+        show(searchResults)
+    } else {
+        hide(searchResults)
+        show(articles)
+    }
+
+    var result = fuse.search(value);
+    if (result.length > 0) {
+        populateResults(result);
+    } else {
+        searchResults.innerHTML = '<p class=\"search-results-empty\">Sorry, nothing matched that search.</p>';
     }
 
     function populateResults(results) {
 
         // pull template from hugo template definition
-        var templateDefinition = document.getElementById("search-result-template").innerHTML;
+        let templateDefinition = document.getElementById("search-result-template").innerHTML;
 
         searchResults.innerHTML = ""
 
         results.forEach(function (value) {
 
-            var output = render(templateDefinition, {
+            let output = render(templateDefinition, {
                 title: value.item.title,
                 link: value.item.permalink,
                 date: value.item.date,
@@ -254,7 +264,7 @@ initSearch = function () {
     }
 
     function render(templateString, data) {
-        var conditionalMatches, conditionalPattern, copy;
+        let conditionalMatches, conditionalPattern, copy;
         conditionalPattern = /\$\{\s*isset ([a-zA-Z]*) \s*\}(.*)\$\{\s*end\s*}/g;
         //since loop below depends on re.lastInxdex, we use a copy to capture any manipulations whilst inside the loop
         copy = templateString;
@@ -269,7 +279,7 @@ initSearch = function () {
         }
         templateString = copy;
         //now any conditionals removed we can do simple substitution
-        var key, find, re;
+        let key, find, re;
         for (key in data) {
             find = '\\$\\{\\s*' + key + '\\s*\\}';
             re = new RegExp(find, 'g');
@@ -277,11 +287,4 @@ initSearch = function () {
         }
         return templateString;
     }
-
-    let show = function (elem) {
-        elem.style.display = 'block';
-    };
-    let hide = function (elem) {
-        elem.style.display = 'none';
-    };
-}()
+}
