@@ -1,65 +1,65 @@
-(function(d){
-  let enableFootnotes = false
-  if (d.currentScript) {
-    enableFootnotes = d.currentScript.dataset['enableFootnotes'] ==  'true'
-  }
-  renderFootnotes = function () {
-    const removeEl = (el) => {
-        if (!el) return;
-        el.remove ? el.remove() : el.parentNode.removeChild(el);
-    };
+(function (d) {
+    let enableFootnotes = false
+    if (d.currentScript) {
+        enableFootnotes = d.currentScript.dataset['enableFootnotes'] == 'true'
+    }
+    renderFootnotes = function () {
+        const removeEl = (el) => {
+            if (!el) return;
+            el.remove ? el.remove() : el.parentNode.removeChild(el);
+        };
 
-    const insertAfter = (target, sib) => {
-        target.after ? target.after(sib) : (
-            target.parentNode.insertBefore(sib, target.nextSibling)
-        );
-    };
+        const insertAfter = (target, sib) => {
+            target.after ? target.after(sib) : (
+                target.parentNode.insertBefore(sib, target.nextSibling)
+            );
+        };
 
-    const insideOut = (el) => {
-        var p = el.parentNode, x = el.innerHTML,
-            c = document.createElement('div');  // a tmp container
-        insertAfter(p, c);
-        c.appendChild(el);
-        el.innerHTML = '';
-        el.appendChild(p);
-        p.innerHTML = x;  // let the original parent have the content of its child
-        insertAfter(c, c.firstElementChild);
-        removeEl(c);
-    };
+        const insideOut = (el) => {
+            var p = el.parentNode, x = el.innerHTML,
+                c = document.createElement('div');  // a tmp container
+            insertAfter(p, c);
+            c.appendChild(el);
+            el.innerHTML = '';
+            el.appendChild(p);
+            p.innerHTML = x;  // let the original parent have the content of its child
+            insertAfter(c, c.firstElementChild);
+            removeEl(c);
+        };
 
-    document.querySelectorAll('.footnotes > ol > li[id^="fn"], #refs > div[id^="ref-"]').forEach(function (fn) {
-        a = document.querySelectorAll('a[href="#' + fn.id + '"]');
-        if (a.length === 0) return;
-        a.forEach(function (el) { el.removeAttribute('href') });
-        a = a[0];
-        side = document.createElement('div');
-        side.className = 'side side-right';
-        if (/^fn/.test(fn.id)) {
-            side.innerHTML = fn.innerHTML;
-            var number = a.innerText;   // footnote number
-            side.firstElementChild.innerHTML = '<span class="bg-number">' + number +
-                '</span> ' + side.firstElementChild.innerHTML;
-            removeEl(side.querySelector('a[href^="#fnref"]'));  // remove backreference
-            a.parentNode.tagName === 'SUP' && insideOut(a);
-        } else {
-            side.innerHTML = fn.outerHTML;
-            a = a.parentNode;
-        }
-        insertAfter(a, side);
-        a.classList.add('note-ref');
-        removeEl(fn);
-    })
-    document.querySelectorAll('.footnotes, #refs').forEach(function (fn) {
-        var items = fn.children;
-        if (fn.id === 'refs') return items.length === 0 && removeEl(fn);
-        // there must be a <hr> and an <ol> left
-        if (items.length !== 2 || items[0].tagName !== 'HR' || items[1].tagName !== 'OL') return;
-        items[1].childElementCount === 0 && removeEl(fn);
-    });
-  };
-  if (enableFootnotes) {
-    renderFootnotes()
-  }
+        document.querySelectorAll('.footnotes > ol > li[id^="fn"], #refs > div[id^="ref-"]').forEach(function (fn) {
+            a = document.querySelectorAll('a[href="#' + fn.id + '"]');
+            if (a.length === 0) return;
+            a.forEach(function (el) { el.removeAttribute('href') });
+            a = a[0];
+            side = document.createElement('div');
+            side.className = 'side side-right';
+            if (/^fn/.test(fn.id)) {
+                side.innerHTML = fn.innerHTML;
+                var number = a.innerText;   // footnote number
+                side.firstElementChild.innerHTML = '<span class="bg-number">' + number +
+                    '</span> ' + side.firstElementChild.innerHTML;
+                removeEl(side.querySelector('a[href^="#fnref"]'));  // remove backreference
+                a.parentNode.tagName === 'SUP' && insideOut(a);
+            } else {
+                side.innerHTML = fn.outerHTML;
+                a = a.parentNode;
+            }
+            insertAfter(a, side);
+            a.classList.add('note-ref');
+            removeEl(fn);
+        })
+        document.querySelectorAll('.footnotes, #refs').forEach(function (fn) {
+            var items = fn.children;
+            if (fn.id === 'refs') return items.length === 0 && removeEl(fn);
+            // there must be a <hr> and an <ol> left
+            if (items.length !== 2 || items[0].tagName !== 'HR' || items[1].tagName !== 'OL') return;
+            items[1].childElementCount === 0 && removeEl(fn);
+        });
+    };
+    if (enableFootnotes) {
+        renderFootnotes()
+    }
 })(document);
 
 renderAnchor = function () {
@@ -178,3 +178,110 @@ switchDarkMode = function () {
         applyCustomDarkModeSettings(toggleCustomDarkMode());
     })
 }();
+
+
+const searchInput = document.getElementById('search-query');
+initSearch = function () {
+    const fuseOptions = {
+        shouldSort: true,
+        includeMatches: true,
+        threshold: 0.0,
+        tokenize: true,
+        location: 0,
+        distance: 100,
+        maxPatternLength: 32,
+        minMatchCharLength: 1,
+        keys: [
+            { name: "title", weight: 0.8 },
+            { name: "contents", weight: 0.5 },
+            { name: "tags", weight: 0.3 },
+            { name: "categories", weight: 0.3 }
+        ]
+    };
+
+    const searchResults = document.getElementById('search-results')
+    const articles = document.getElementById('articles')
+    searchInput.addEventListener("input", function () {
+        let value = searchInput.value
+        executeSearch(value);
+    })
+
+    function executeSearch(value) {
+        if (value.length != 0) {
+            hide(articles)
+            show(searchResults)
+        } else {
+            hide(searchResults)
+            show(articles)
+        }
+
+        fetch('/index.json').then(function (response) {
+            if (response.status !== 200) {
+                console.error('[' + response.status + ']Error:', response.statusText);
+                return;
+            }
+            response.json().then(function (pages) {
+                var fuse = new Fuse(pages, fuseOptions);
+                var result = fuse.search(value);
+                if (result.length > 0) {
+                    populateResults(result);
+                } else {
+                    searchResults.innerHTML = '<p class=\"search-results-empty\">Sorry, nothing matched that search.</p>';
+                }
+            })
+                .catch(function (err) {
+                    console.error('[Fetch]Error:', err);
+                });
+        });
+    }
+
+    function populateResults(results) {
+
+        // pull template from hugo template definition
+        var templateDefinition = document.getElementById("search-result-template").innerHTML;
+
+        searchResults.innerHTML = ""
+
+        results.forEach(function (value) {
+
+            var output = render(templateDefinition, {
+                title: value.item.title,
+                link: value.item.permalink,
+                date: value.item.date,
+            });
+            searchResults.innerHTML += output;
+        });
+    }
+
+    function render(templateString, data) {
+        var conditionalMatches, conditionalPattern, copy;
+        conditionalPattern = /\$\{\s*isset ([a-zA-Z]*) \s*\}(.*)\$\{\s*end\s*}/g;
+        //since loop below depends on re.lastInxdex, we use a copy to capture any manipulations whilst inside the loop
+        copy = templateString;
+        while ((conditionalMatches = conditionalPattern.exec(templateString)) !== null) {
+            if (data[conditionalMatches[1]]) {
+                //valid key, remove conditionals, leave contents.
+                copy = copy.replace(conditionalMatches[0], conditionalMatches[2]);
+            } else {
+                //not valid, remove entire section
+                copy = copy.replace(conditionalMatches[0], '');
+            }
+        }
+        templateString = copy;
+        //now any conditionals removed we can do simple substitution
+        var key, find, re;
+        for (key in data) {
+            find = '\\$\\{\\s*' + key + '\\s*\\}';
+            re = new RegExp(find, 'g');
+            templateString = templateString.replace(re, data[key]);
+        }
+        return templateString;
+    }
+
+    let show = function (elem) {
+        elem.style.display = 'block';
+    };
+    let hide = function (elem) {
+        elem.style.display = 'none';
+    };
+}()

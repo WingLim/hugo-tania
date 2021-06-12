@@ -11,8 +11,21 @@
 
 <section>
     <div class="container">
-        <input id="search" type="search" placeholder="Search for anything...">
-        <section>
+        <input id="search-query" type="search" placeholder="Search for anything...">
+        
+        <section id="search-results">
+        </section>
+        <script id="search-result-template" type="text/x-js-template">
+          <div class="post">
+            <a href="${link}">
+              <div class="post-row">
+                  <time>${date}</time>
+                  <h3>${title}</h3>
+              </div>
+            </a>
+          </div>
+        </script>
+        <section id="articles">
             {{ range $pages.GroupByDate "2006" }}
             <section>
                 <h2>{{ .Key }}</h2>
