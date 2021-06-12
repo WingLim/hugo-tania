@@ -15,16 +15,6 @@
         
         <div id="search-results">
         </div>
-        <script id="search-result-template" type="text/x-js-template">
-          <div class="post">
-            <a href="${link}">
-              <div class="post-row">
-                  <time>${date}</time>
-                  <h3>${title}</h3>
-              </div>
-            </a>
-          </div>
-        </script>
         <section id="articles">
             {{ range $pages.GroupByDate "2006" }}
             <section>

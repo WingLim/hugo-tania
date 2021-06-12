@@ -244,45 +244,20 @@ executeSearch = function(value) {
     }
 
     function populateResults(results) {
-
-        // pull template from hugo template definition
-        let templateDefinition = document.getElementById("search-result-template").innerHTML;
-
         searchResults.innerHTML = ""
 
         results.forEach(function (value) {
-
-            let output = render(templateDefinition, {
-                title: value.item.title,
-                link: value.item.permalink,
-                date: value.item.date,
-            });
-            searchResults.innerHTML += output;
+            let item = value.item
+            let html = `
+            <div class="post">
+                <a href="${item.permalink}">
+                    <div class="post-row">
+                        <time>${item.date}</time>
+                        <h3>${item.title}</h3>
+                    </div>
+                </a>
+            </div>`
+            searchResults.innerHTML += html;
         });
-    }
-
-    function render(templateString, data) {
-        let conditionalMatches, conditionalPattern, copy;
-        conditionalPattern = /\$\{\s*isset ([a-zA-Z]*) \s*\}(.*)\$\{\s*end\s*}/g;
-        //since loop below depends on re.lastInxdex, we use a copy to capture any manipulations whilst inside the loop
-        copy = templateString;
-        while ((conditionalMatches = conditionalPattern.exec(templateString)) !== null) {
-            if (data[conditionalMatches[1]]) {
-                //valid key, remove conditionals, leave contents.
-                copy = copy.replace(conditionalMatches[0], conditionalMatches[2]);
-            } else {
-                //not valid, remove entire section
-                copy = copy.replace(conditionalMatches[0], '');
-            }
-        }
-        templateString = copy;
-        //now any conditionals removed we can do simple substitution
-        let key, find, re;
-        for (key in data) {
-            find = '\\$\\{\\s*' + key + '\\s*\\}';
-            re = new RegExp(find, 'g');
-            templateString = templateString.replace(re, data[key]);
-        }
-        return templateString;
     }
 }
