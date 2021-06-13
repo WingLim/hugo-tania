@@ -54,7 +54,7 @@ menu:
 
 There are a few configuration options that you can add to your `config.yaml` file.
 
-You can also see the `toml` example [exampleSite/config.toml](https://github.com/WingLim/hugo-tania/blob/main/exampleSite/config.toml)
+You can also see the `toml` example in [exampleSite/config.example.toml](https://github.com/WingLim/hugo-tania/blob/main/exampleSite/config.example.toml)
 
 ```yaml
 params:
