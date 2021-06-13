@@ -222,7 +222,7 @@ initFuse = function () {
 
 const searchInput = document.getElementById('search-query');
 const searchResults = document.getElementById('search-results')
-const articles = document.getElementById('articles')
+const articlesList = document.getElementById('articles-list')
 if (searchInput != undefined) {
     searchInput.addEventListener("input", function () {
         let value = searchInput.value
@@ -278,11 +278,11 @@ filterSelect = function(element) {
 
 executeSearch = function(value) {
     if (value.length != 0) {
-        hide(articles)
+        hide(articlesList)
         show(searchResults)
     } else {
         hide(searchResults)
-        show(articles)
+        show(articlesList)
     }
 
     var result = fuse.search(value);
