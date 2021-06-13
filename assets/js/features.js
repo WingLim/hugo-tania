@@ -261,17 +261,6 @@ buildSearchValue = function(value) {
     }
 }
 
-toggleCategory = function(element) {
-    let value = element.dataset.value
-    searchFilter.push(value)
-    if (element.classList.contains('active')) {
-        element.classList.remove('active')
-        executeSearch("", categoryFuse)
-    } else {
-        element.classList.add('active')
-        
-    }
-}
 filterSelect = function(element) {
     let value = element.dataset.value
     let type = element.dataset.type
