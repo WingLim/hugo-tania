@@ -194,6 +194,7 @@ initFuse = function () {
         distance: 100,
         maxPatternLength: 32,
         minMatchCharLength: 1,
+        useExtendedSearch: true,
         keys: [
             { name: "title", weight: 0.8 },
             { name: "contents", weight: 0.5 },
@@ -224,7 +225,7 @@ const searchResults = document.getElementById('search-results')
 const articles = document.getElementById('articles')
 searchInput.addEventListener("input", function () {
     let value = searchInput.value
-    executeSearch(buildSearchValue(value), fuse);
+    executeSearch(buildSearchValue(value));
 })
 
 let searchFilter = new Map()
@@ -250,7 +251,7 @@ buildSearchValue = function(value) {
         let orObject = {
             $or: [
                 {title: value},
-                {content: value}
+                {contents: "'"+value}
             ]
         }
         filter.push(orObject)
