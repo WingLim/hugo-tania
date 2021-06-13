@@ -10,6 +10,10 @@ params:
     github: https://github.com/WingLim
     email: email@example.com
   enableFootnotes: true
+  sitename: "Hugo Tania is Amazing"
+  sitedesc: "Hugo is Absurdly Fast!"
+  author: "Hugo Tania"
+
 
 menu:
   header:
