@@ -86,8 +86,8 @@ params:
     whatsapp:
 
   # Addtional option for meta SEO
-  sitename:
-  sitedesc: 
+  siteName:
+  siteDesc: 
   author: 
 ```
 
