@@ -1,4 +1,4 @@
-import Fuse from './fuse'
+import Fuse from '../js/fuse'
 
 declare global {
   interface Window { 

@@ -23,6 +23,6 @@
         onload="renderMathInElement(document.querySelector('.article-post'));"></script>
     {{- end }}
     {{- $opts := dict "minify" hugo.IsProduction -}}
-    {{ $features := resources.Get "js/features.ts" | js.Build $opts | fingerprint }}
+    {{ $features := resources.Get "ts/features.ts" | js.Build $opts | fingerprint }}
     <script async src="{{ $features.RelPermalink }}" data-enable-footnotes="{{ .Site.Params.enableFootnotes | default true }}"></script>
 </footer>

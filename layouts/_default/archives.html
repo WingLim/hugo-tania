@@ -46,7 +46,7 @@
 </section>
 
 {{- $opts := dict "minify" hugo.IsProduction -}}
-{{ $search := resources.Get "js/search.ts" | js.Build $opts | fingerprint }}
+{{ $search := resources.Get "ts/search.ts" | js.Build $opts | fingerprint }}
 <script async src="{{ $search.RelPermalink }}"></script>
 
 {{ end }}
