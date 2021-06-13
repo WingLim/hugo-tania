@@ -11,8 +11,8 @@ params:
   # Enable float footnotes.
   # Default to true
   enableFootnotes: true
-  sitename: "Hugo Tania is Amazing"
-  sitedesc: "Hugo is Absurdly Fast!"
+  siteName: "Hugo Tania is Amazing"
+  siteDesc: "Hugo is Absurdly Fast!"
   author: "Hugo Tania"
 
 
