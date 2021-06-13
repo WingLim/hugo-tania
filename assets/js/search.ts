@@ -10,6 +10,7 @@ declare global {
 let show = function (elem: HTMLElement) {
   elem.style.display = 'block';
 };
+
 let hide = function (elem: HTMLElement) {
   elem.style.display = 'none';
 };
@@ -46,32 +47,33 @@ let initFuse = function () {
   .catch(function (err) {
       console.error('[Fetch]Error:', err);
   });
-}()
+}
+initFuse();
 
 const searchInput = document.getElementById('search-query') as HTMLInputElement;
-const searchResults = document.getElementById('search-results')
-const articlesList = document.getElementById('articles-list')
+const searchResults = document.getElementById('search-results');
+const articlesList = document.getElementById('articles-list');
 if (searchInput != undefined) {
   searchInput.addEventListener("input", function () {
-      let value = searchInput.value
+      let value = searchInput.value;
       executeSearch(buildSearchValue(value));
   })
 }
 
-let searchFilter = new Map()
+let searchFilter = new Map();
 let buildSearchValue = function(value: string) {
-  let filter = []
+  let filter = [];
   if (searchFilter.size == 0 && value.length == 0) {
-      return ""
+      return "";
   }
   searchFilter.forEach((v: string, k: string) => {
-      let object = {}
+      let object = {};
       if (v == "categories") {
           object = {
               categories: k
           }
       }
-      filter.push(object)
+      filter.push(object);
   })
   if (value != undefined && value.length != 0) {
       let orObject = {
@@ -82,7 +84,7 @@ let buildSearchValue = function(value: string) {
               {contents: "'"+value}
           ]
       }
-      filter.push(orObject)
+      filter.push(orObject);
   }
   return {
       $and: filter
@@ -90,37 +92,49 @@ let buildSearchValue = function(value: string) {
 }
 
 let filterSelect = function(element: HTMLElement) {
-  let value = element.dataset.value
-  let type = element.dataset.type
+  let value = element.dataset.value;
+  let type = element.dataset.type;
   if (element.classList.contains('active')) {
-      searchFilter.delete(value)
-      element.classList.remove('active')
+      searchFilter.delete(value);
+      element.classList.remove('active');
   } else {
-      searchFilter.set(value, type)
-      element.classList.add('active')
+      searchFilter.set(value, type);
+      element.classList.add('active');
   }
-  executeSearch(buildSearchValue(""))
+  executeSearch(buildSearchValue(""));
 }
-window.filterSelect = filterSelect
+window.filterSelect = filterSelect;
 
 let executeSearch = function(value: string|object) {
   if ((typeof value === "string" && value.length != 0) || typeof value === "object") {
-      hide(articlesList)
-      show(searchResults)
+      hide(articlesList);
+      show(searchResults);
   } else {
-      hide(searchResults)
-      show(articlesList)
+      hide(searchResults);
+      show(articlesList);
   }
 
-  var result = window.fuse.search(value);
+  let result = window.fuse.search(value);
   if (result.length > 0) {
       populateResults(result);
   } else {
       searchResults.innerHTML = '<p>Sorry, nothing matched that search.</p>';
   }
 
-  function populateResults(results) {
-      searchResults.innerHTML = ""
+  interface searchItem {
+    item: {
+      categorise: Array<string>,
+      contents: string,
+      date: string,
+      permalink: string,
+      tags: Array<string>,
+      title: string
+    },
+    refIndex: number
+  }
+
+  function populateResults(results: Array<searchItem>) {
+      searchResults.innerHTML = "";
 
       results.forEach(function (value) {
           let item = value.item
