@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+      "baseUrl": ".",
+      "paths": {
+          "*": [
+              "*"
+          ]
+      },
+  },
+  "lib": [
+    "es2015.promise",
+  ],
+}

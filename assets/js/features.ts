@@ -1,29 +1,23 @@
-let show = function (elem) {
-    elem.style.display = 'block';
-};
-let hide = function (elem) {
-    elem.style.display = 'none';
-};
-
 (function (d) {
     let enableFootnotes = false
     if (d.currentScript) {
         enableFootnotes = d.currentScript.dataset['enableFootnotes'] == 'true'
     }
-    renderFootnotes = function () {
-        const removeEl = (el) => {
+    let renderFootnotes = function () {
+        const removeEl = (el: Element) => {
             if (!el) return;
             el.remove ? el.remove() : el.parentNode.removeChild(el);
         };
 
-        const insertAfter = (target, sib) => {
+        const insertAfter = (target: HTMLElement, sib: Element) => {
             target.after ? target.after(sib) : (
                 target.parentNode.insertBefore(sib, target.nextSibling)
             );
         };
 
-        const insideOut = (el) => {
-            var p = el.parentNode, x = el.innerHTML,
+        const insideOut = (el: Element) => {
+            var p = el.parentNode as HTMLElement, 
+                x = el.innerHTML,
                 c = document.createElement('div');  // a tmp container
             insertAfter(p, c);
             c.appendChild(el);
@@ -35,25 +29,26 @@ let hide = function (elem) {
         };
 
         document.querySelectorAll('.footnotes > ol > li[id^="fn"], #refs > div[id^="ref-"]').forEach(function (fn) {
-            a = document.querySelectorAll('a[href="#' + fn.id + '"]');
+            let a = document.querySelectorAll('a[href="#' + fn.id + '"]');
             if (a.length === 0) return;
             a.forEach(function (el) { el.removeAttribute('href') });
-            a = a[0];
-            side = document.createElement('div');
+            let newA = a[0] as HTMLElement;
+            let side = document.createElement('div');
             side.className = 'side side-right';
             if (/^fn/.test(fn.id)) {
                 side.innerHTML = fn.innerHTML;
-                var number = a.innerText;   // footnote number
+                var number = newA.innerHTML;   // footnote number
                 side.firstElementChild.innerHTML = '<span class="bg-number">' + number +
                     '</span> ' + side.firstElementChild.innerHTML;
                 removeEl(side.querySelector('a[href^="#fnref"]'));  // remove backreference
-                a.parentNode.tagName === 'SUP' && insideOut(a);
+                let newAParent = newA.parentNode as HTMLElement
+                newAParent.tagName === 'SUP' && insideOut(newA);
             } else {
                 side.innerHTML = fn.outerHTML;
-                a = a.parentNode;
+                newA = newA.parentNode as HTMLElement;
             }
-            insertAfter(a, side);
-            a.classList.add('note-ref');
+            insertAfter(newA, side);
+            newA.classList.add('note-ref');
             removeEl(fn);
         })
         document.querySelectorAll('.footnotes, #refs').forEach(function (fn) {
@@ -69,7 +64,7 @@ let hide = function (elem) {
     }
 })(document);
 
-renderAnchor = function () {
+let renderAnchor = function () {
     for (let num = 1; num <= 6; num++) {
         // search h1-h6
         const headers = document.querySelectorAll('.article-post>h' + num);
@@ -81,25 +76,25 @@ renderAnchor = function () {
     }
 }();
 
-switchDarkMode = function () {
+let switchDarkMode = function () {
     const rootElement = document.documentElement; // <html>
     const darkModeStorageKey = 'user-color-scheme'; // use as localStorage's key
     const rootElementDarkModeAttributeName = 'data-user-color-scheme';
     const darkModeTogglebuttonElement = document.getElementById('dark-mode-button');
 
-    const setLS = (k, v) => {
+    const setLS = (k: string, v: string) => {
         try {
             localStorage.setItem(k, v);
         } catch (e) { }
     }
 
-    const removeLS = (k) => {
+    const removeLS = (k: string) => {
         try {
             localStorage.removeItem(k);
         } catch (e) { }
     }
 
-    const getLS = (k) => {
+    const getLS = (k: string) => {
         try {
             return localStorage.getItem(k);
         } catch (e) {
@@ -127,14 +122,14 @@ switchDarkMode = function () {
         'light': '🌙'
     }
 
-    const setModeButtonIcon = (mode) => {
+    const setModeButtonIcon = (mode: string) => {
         darkModeTogglebuttonElement.innerHTML = modeIcons[mode]
     }
 
-    const applyCustomDarkModeSettings = (mode) => {
+    const applyCustomDarkModeSettings = (mode?: string) => {
         // receive user's operation or get previous mode from localStorage
         const currentSetting = mode || getLS(darkModeStorageKey);
-
+        let nowMode: string
         if (currentSetting === getModeFromCSSMediaQuery()) {
             // When the user selected mode equal prefers-color-scheme 
             // reset and restored to automatic mode
@@ -185,126 +180,3 @@ switchDarkMode = function () {
         applyCustomDarkModeSettings(toggleCustomDarkMode());
     })
 }();
-
-initFuse = function () {
-    const fuseOptions = {
-        shouldSort: true,
-        threshold: 0.3,
-        location: 0,
-        distance: 100,
-        maxPatternLength: 32,
-        minMatchCharLength: 1,
-        useExtendedSearch: true,
-        keys: [
-            { name: "title", weight: 0.8 },
-            { name: "contents", weight: 0.5 },
-            { name: "tags", weight: 0.3 },
-            { name: "categories", weight: 0.3 }
-        ]
-    };
-
-    fetch('/index.json')
-    .then(function (response) {
-        if (response.status !== 200) {
-            console.error('[' + response.status + ']Error:', response.statusText);
-            return;
-        }
-        response.json().then(function (pages) {
-            let fuse = new Fuse(pages, fuseOptions);
-            window.fuse = fuse;
-        })
-        
-    })
-    .catch(function (err) {
-        console.error('[Fetch]Error:', err);
-    });
-}()
-
-const searchInput = document.getElementById('search-query');
-const searchResults = document.getElementById('search-results')
-const articlesList = document.getElementById('articles-list')
-if (searchInput != undefined) {
-    searchInput.addEventListener("input", function () {
-        let value = searchInput.value
-        executeSearch(buildSearchValue(value));
-    })
-}
-
-let searchFilter = new Map()
-buildSearchValue = function(value) {
-    let filter = []
-    if (searchFilter.size == 0 && value.length == 0) {
-        return ""
-    }
-    searchFilter.forEach((v, k) => {
-        let object = {}
-        if (v == "categories") {
-            object = {
-                categories: k
-            }
-        }
-        filter.push(object)
-    })
-    if (value != undefined && value.length != 0) {
-        let orObject = {
-            $or: [
-                {title: value},
-                // fuse extended search, 'value is include-match
-                // more details: https://fusejs.io/examples.html#extended-search
-                {contents: "'"+value}
-            ]
-        }
-        filter.push(orObject)
-    }
-    return {
-        $and: filter
-    }
-}
-
-filterSelect = function(element) {
-    let value = element.dataset.value
-    let type = element.dataset.type
-    if (element.classList.contains('active')) {
-        searchFilter.delete(value)
-        element.classList.remove('active')
-    } else {
-        searchFilter.set(value, type)
-        element.classList.add('active')
-    }
-    executeSearch(buildSearchValue(""))
-}
-
-executeSearch = function(value) {
-    if (value.length != 0) {
-        hide(articlesList)
-        show(searchResults)
-    } else {
-        hide(searchResults)
-        show(articlesList)
-    }
-
-    var result = fuse.search(value);
-    if (result.length > 0) {
-        populateResults(result);
-    } else {
-        searchResults.innerHTML = '<p>Sorry, nothing matched that search.</p>';
-    }
-
-    function populateResults(results) {
-        searchResults.innerHTML = ""
-
-        results.forEach(function (value) {
-            let item = value.item
-            let html = `
-            <div class="post">
-                <a href="${item.permalink}">
-                    <div class="post-row">
-                        <time>${item.date}</time>
-                        <h3>${item.title}</h3>
-                    </div>
-                </a>
-            </div>`
-            searchResults.innerHTML += html;
-        });
-    }
-}
