@@ -4,9 +4,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="theme-color" content="dark">
-    <title>{{ with .Title }} {{ . }} | {{ end }}{{ .Site.Title }}</title>
-    <!-- uncomment this to add favicon -->
-    <!-- <link rel="icon" type="image/png" href="{{ "/icons/favicon.png" | relURL }}" /> -->
+    <title>{{with.Title}}{{.}} | {{end}}{{.Site.Title}}</title>
+
+    <meta property="og:site_name" content="{{.Site.Params.siteName}}" />
+    <meta property="og:title" content="{{with.Title}}{{.}} | {{end}}{{.Site.Title}}"/>
+    <meta itemprop="name" content="{{with.Title}}{{.}} | {{end}}{{.Site.Title}}" />
+    <meta name="twitter:title" content="{{with.Title}}{{.}} | {{end}}{{.Site.Title}}" />
+    <meta name="application-name" content="{{with.Title}}{{.}} | {{end}}{{.Site.Title}}" />
+
+
+    <meta name="description" content="{{ if .Description }}{{.Description}}{{ else }}{{.Site.Params.siteDesc}}{{end}}" />
+    <meta name="twitter:description" content="{{ if .Description }}{{.Description}} {{ else }}{{.Site.Params.siteDesc}}{{end}}"/>
+    <meta itemprop="description" content="{{ if .Description }} {{.Description}} {{ else }}{{.Site.Params.siteDesc}}{{end}}"/>
+    <meta property="og:description" content="{{ if .Description }} {{.Description}} {{ else }}{{.Site.Params.siteDesc}}{{ end }}" />
+
+    {{ partial "post-meta.html" . }}
+
+    <link rel="shortcut icon" type="image/x-icon" href="{{ "favicon.ico" | relURL }}" />
     {{ $style := resources.Get "sass/main.scss" | toCSS | minify | fingerprint }}
     <link rel="stylesheet" href="{{ $style.RelPermalink }}">
 </head>

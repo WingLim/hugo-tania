@@ -11,6 +11,10 @@ params:
   # Enable float footnotes.
   # Default to true
   enableFootnotes: true
+  siteName: "Hugo Tania is Amazing"
+  siteDesc: "Hugo is Absurdly Fast!"
+  author: "Hugo Tania"
+
 
   # Limit how many categories filter show above search input.
   # Default to 5
