@@ -223,10 +223,12 @@ initFuse = function () {
 const searchInput = document.getElementById('search-query');
 const searchResults = document.getElementById('search-results')
 const articles = document.getElementById('articles')
-searchInput.addEventListener("input", function () {
-    let value = searchInput.value
-    executeSearch(buildSearchValue(value));
-})
+if (searchInput != undefined) {
+    searchInput.addEventListener("input", function () {
+        let value = searchInput.value
+        executeSearch(buildSearchValue(value));
+    })
+}
 
 let searchFilter = new Map()
 buildSearchValue = function(value) {
