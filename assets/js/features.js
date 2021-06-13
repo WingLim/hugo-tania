@@ -253,6 +253,8 @@ buildSearchValue = function(value) {
         let orObject = {
             $or: [
                 {title: value},
+                // fuse extended search, 'value is include-match
+                // more details: https://fusejs.io/examples.html#extended-search
                 {contents: "'"+value}
             ]
         }
@@ -289,7 +291,7 @@ executeSearch = function(value) {
     if (result.length > 0) {
         populateResults(result);
     } else {
-        searchResults.innerHTML = '<p class=\"search-results-empty\">Sorry, nothing matched that search.</p>';
+        searchResults.innerHTML = '<p>Sorry, nothing matched that search.</p>';
     }
 
     function populateResults(results) {
