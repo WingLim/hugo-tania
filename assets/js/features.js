@@ -231,7 +231,7 @@ searchInput.addEventListener("input", function () {
 let searchFilter = new Map()
 buildSearchValue = function(value) {
     let filter = []
-    if (searchFilter.size == 0 && value == undefined) {
+    if (searchFilter.size == 0 && value.length == 0) {
         return ""
     }
     searchFilter.forEach((v, k) => {
@@ -282,7 +282,7 @@ filterSelect = function(element) {
         searchFilter.set(value, type)
         element.classList.add('active')
     }
-    executeSearch(buildSearchValue())
+    executeSearch(buildSearchValue(""))
 }
 
 executeSearch = function(value) {
