@@ -1,65 +1,72 @@
-(function(d){
-  let enableFootnotes = false
-  if (d.currentScript) {
-    enableFootnotes = d.currentScript.dataset['enableFootnotes'] ==  'true'
-  }
-  renderFootnotes = function () {
-    const removeEl = (el) => {
-        if (!el) return;
-        el.remove ? el.remove() : el.parentNode.removeChild(el);
-    };
+let show = function (elem) {
+    elem.style.display = 'block';
+};
+let hide = function (elem) {
+    elem.style.display = 'none';
+};
 
-    const insertAfter = (target, sib) => {
-        target.after ? target.after(sib) : (
-            target.parentNode.insertBefore(sib, target.nextSibling)
-        );
-    };
+(function (d) {
+    let enableFootnotes = false
+    if (d.currentScript) {
+        enableFootnotes = d.currentScript.dataset['enableFootnotes'] == 'true'
+    }
+    renderFootnotes = function () {
+        const removeEl = (el) => {
+            if (!el) return;
+            el.remove ? el.remove() : el.parentNode.removeChild(el);
+        };
 
-    const insideOut = (el) => {
-        var p = el.parentNode, x = el.innerHTML,
-            c = document.createElement('div');  // a tmp container
-        insertAfter(p, c);
-        c.appendChild(el);
-        el.innerHTML = '';
-        el.appendChild(p);
-        p.innerHTML = x;  // let the original parent have the content of its child
-        insertAfter(c, c.firstElementChild);
-        removeEl(c);
-    };
+        const insertAfter = (target, sib) => {
+            target.after ? target.after(sib) : (
+                target.parentNode.insertBefore(sib, target.nextSibling)
+            );
+        };
 
-    document.querySelectorAll('.footnotes > ol > li[id^="fn"], #refs > div[id^="ref-"]').forEach(function (fn) {
-        a = document.querySelectorAll('a[href="#' + fn.id + '"]');
-        if (a.length === 0) return;
-        a.forEach(function (el) { el.removeAttribute('href') });
-        a = a[0];
-        side = document.createElement('div');
-        side.className = 'side side-right';
-        if (/^fn/.test(fn.id)) {
-            side.innerHTML = fn.innerHTML;
-            var number = a.innerText;   // footnote number
-            side.firstElementChild.innerHTML = '<span class="bg-number">' + number +
-                '</span> ' + side.firstElementChild.innerHTML;
-            removeEl(side.querySelector('a[href^="#fnref"]'));  // remove backreference
-            a.parentNode.tagName === 'SUP' && insideOut(a);
-        } else {
-            side.innerHTML = fn.outerHTML;
-            a = a.parentNode;
-        }
-        insertAfter(a, side);
-        a.classList.add('note-ref');
-        removeEl(fn);
-    })
-    document.querySelectorAll('.footnotes, #refs').forEach(function (fn) {
-        var items = fn.children;
-        if (fn.id === 'refs') return items.length === 0 && removeEl(fn);
-        // there must be a <hr> and an <ol> left
-        if (items.length !== 2 || items[0].tagName !== 'HR' || items[1].tagName !== 'OL') return;
-        items[1].childElementCount === 0 && removeEl(fn);
-    });
-  };
-  if (enableFootnotes) {
-    renderFootnotes()
-  }
+        const insideOut = (el) => {
+            var p = el.parentNode, x = el.innerHTML,
+                c = document.createElement('div');  // a tmp container
+            insertAfter(p, c);
+            c.appendChild(el);
+            el.innerHTML = '';
+            el.appendChild(p);
+            p.innerHTML = x;  // let the original parent have the content of its child
+            insertAfter(c, c.firstElementChild);
+            removeEl(c);
+        };
+
+        document.querySelectorAll('.footnotes > ol > li[id^="fn"], #refs > div[id^="ref-"]').forEach(function (fn) {
+            a = document.querySelectorAll('a[href="#' + fn.id + '"]');
+            if (a.length === 0) return;
+            a.forEach(function (el) { el.removeAttribute('href') });
+            a = a[0];
+            side = document.createElement('div');
+            side.className = 'side side-right';
+            if (/^fn/.test(fn.id)) {
+                side.innerHTML = fn.innerHTML;
+                var number = a.innerText;   // footnote number
+                side.firstElementChild.innerHTML = '<span class="bg-number">' + number +
+                    '</span> ' + side.firstElementChild.innerHTML;
+                removeEl(side.querySelector('a[href^="#fnref"]'));  // remove backreference
+                a.parentNode.tagName === 'SUP' && insideOut(a);
+            } else {
+                side.innerHTML = fn.outerHTML;
+                a = a.parentNode;
+            }
+            insertAfter(a, side);
+            a.classList.add('note-ref');
+            removeEl(fn);
+        })
+        document.querySelectorAll('.footnotes, #refs').forEach(function (fn) {
+            var items = fn.children;
+            if (fn.id === 'refs') return items.length === 0 && removeEl(fn);
+            // there must be a <hr> and an <ol> left
+            if (items.length !== 2 || items[0].tagName !== 'HR' || items[1].tagName !== 'OL') return;
+            items[1].childElementCount === 0 && removeEl(fn);
+        });
+    };
+    if (enableFootnotes) {
+        renderFootnotes()
+    }
 })(document);
 
 renderAnchor = function () {
@@ -178,3 +185,126 @@ switchDarkMode = function () {
         applyCustomDarkModeSettings(toggleCustomDarkMode());
     })
 }();
+
+initFuse = function () {
+    const fuseOptions = {
+        shouldSort: true,
+        threshold: 0.3,
+        location: 0,
+        distance: 100,
+        maxPatternLength: 32,
+        minMatchCharLength: 1,
+        useExtendedSearch: true,
+        keys: [
+            { name: "title", weight: 0.8 },
+            { name: "contents", weight: 0.5 },
+            { name: "tags", weight: 0.3 },
+            { name: "categories", weight: 0.3 }
+        ]
+    };
+
+    fetch('/index.json')
+    .then(function (response) {
+        if (response.status !== 200) {
+            console.error('[' + response.status + ']Error:', response.statusText);
+            return;
+        }
+        response.json().then(function (pages) {
+            let fuse = new Fuse(pages, fuseOptions);
+            window.fuse = fuse;
+        })
+        
+    })
+    .catch(function (err) {
+        console.error('[Fetch]Error:', err);
+    });
+}()
+
+const searchInput = document.getElementById('search-query');
+const searchResults = document.getElementById('search-results')
+const articlesList = document.getElementById('articles-list')
+if (searchInput != undefined) {
+    searchInput.addEventListener("input", function () {
+        let value = searchInput.value
+        executeSearch(buildSearchValue(value));
+    })
+}
+
+let searchFilter = new Map()
+buildSearchValue = function(value) {
+    let filter = []
+    if (searchFilter.size == 0 && value.length == 0) {
+        return ""
+    }
+    searchFilter.forEach((v, k) => {
+        let object = {}
+        if (v == "categories") {
+            object = {
+                categories: k
+            }
+        }
+        filter.push(object)
+    })
+    if (value != undefined && value.length != 0) {
+        let orObject = {
+            $or: [
+                {title: value},
+                // fuse extended search, 'value is include-match
+                // more details: https://fusejs.io/examples.html#extended-search
+                {contents: "'"+value}
+            ]
+        }
+        filter.push(orObject)
+    }
+    return {
+        $and: filter
+    }
+}
+
+filterSelect = function(element) {
+    let value = element.dataset.value
+    let type = element.dataset.type
+    if (element.classList.contains('active')) {
+        searchFilter.delete(value)
+        element.classList.remove('active')
+    } else {
+        searchFilter.set(value, type)
+        element.classList.add('active')
+    }
+    executeSearch(buildSearchValue(""))
+}
+
+executeSearch = function(value) {
+    if (value.length != 0) {
+        hide(articlesList)
+        show(searchResults)
+    } else {
+        hide(searchResults)
+        show(articlesList)
+    }
+
+    var result = fuse.search(value);
+    if (result.length > 0) {
+        populateResults(result);
+    } else {
+        searchResults.innerHTML = '<p>Sorry, nothing matched that search.</p>';
+    }
+
+    function populateResults(results) {
+        searchResults.innerHTML = ""
+
+        results.forEach(function (value) {
+            let item = value.item
+            let html = `
+            <div class="post">
+                <a href="${item.permalink}">
+                    <div class="post-row">
+                        <time>${item.date}</time>
+                        <h3>${item.title}</h3>
+                    </div>
+                </a>
+            </div>`
+            searchResults.innerHTML += html;
+        });
+    }
+}

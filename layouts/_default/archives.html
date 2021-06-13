@@ -11,7 +11,19 @@
 
 <section>
     <div class="container">
-        <section>
+        <div class="filter-container">
+          {{ $maxCategoryToShow := $.Site.Params.maxCategoryToShow | default 5 }}
+          {{ range .Site.Taxonomies.categories.TaxonomyArray | first $maxCategoryToShow }}
+            <div class="filter-item" data-value="{{ .Page.Title }}" data-type="categories" onclick="filterSelect(this)">
+              {{ .Page.Title }}<sup>{{ .Count }}</sup>
+            </div>
+          {{ end }}
+        </div>
+        <input id="search-query" type="search" placeholder="Search for anything...">
+        
+        <div id="search-results">
+        </div>
+        <section id="articles-list">
             {{ range $pages.GroupByDate "2006" }}
             <section>
                 <h2>{{ .Key }}</h2>
@@ -23,7 +35,6 @@
                                 <time>{{ .Date.Format "Jan 02" }}</time>
                                 <h3>{{ .Title }}</h3>
                             </div>
-                            <!--<div class="new-post">New!</div>-->
                         </a>
                     </div>
                     {{ end }}

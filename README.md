@@ -66,6 +66,13 @@ If you want to disable the float footnotes, add below params.
 enableFootnotes: false
 ```
 
+Limit how many categories filter show above search input.
+
+Default is `5`
+```yaml
+maxCategoryToShow: 10
+```
+
 ### Layout
 
 `articles` layout is for showing all articles you write.
