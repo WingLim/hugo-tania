@@ -84,6 +84,11 @@ params:
     twitter:
     twitch:
     whatsapp:
+
+  # Addtional option for meta SEO
+  sitename:
+  sitedesc: 
+  author: 
 ```
 
 ## Layout
