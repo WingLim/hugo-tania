@@ -12,13 +12,9 @@
 <section>
     <div class="container">
         <div class="filter-container">
-          {{ range .Site.Taxonomies.categories }}
+          {{ $maxCategoryToShow := $.Site.Params.maxCategoryToShow | default 5 }}
+          {{ range .Site.Taxonomies.categories.TaxonomyArray | first $maxCategoryToShow }}
             <div class="filter-item" data-value="{{ .Page.Title }}" data-type="categories" onclick="filterSelect(this)">
-              {{ .Page.Title }}<sup>{{ .Count }}</sup>
-            </div>
-          {{ end }}
-          {{ range .Site.Taxonomies.tags }}
-            <div class="filter-item" data-value="{{ .Page.Title }}" data-type="tags" onclick="filterSelect(this)">
               {{ .Page.Title }}<sup>{{ .Count }}</sup>
             </div>
           {{ end }}
