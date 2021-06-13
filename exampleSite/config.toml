@@ -1,0 +1,51 @@
+baseurl = "https://example.com"
+languageCode = "en-us"
+title = "Hugo Tania"
+theme = "hugo-tania"
+paginate = 6
+
+[params]
+  # Emoji will show before the blog title on site navbar.
+  titleEmoji  = '😎'
+
+  # Enable float footnotes.
+  # Default to true
+  enableFootnotes = true
+
+  # Limit how many categories filter show above search input.
+  # Default to 5
+  maxCategoryToShow = 10
+
+  # Show your social information with icon on index bio with `_index.md` content.
+  [params.socialOptions]
+    dev-to = ""
+    email = ""
+    facebook = ""
+    github = ""
+    instagram = ""
+    linkedin = ""
+    medium = ""
+    stack-overflow = ""
+    steam = ""
+    telegram = ""
+    twitter = ""
+    twitch = ""
+    whatsapp = ""
+
+[menu]
+[[menu.header]]
+  name = "Articles"
+  url = "/articles/"
+[[menu.footer]]
+    name = "RSS"
+    url = "/index.xml"
+
+[markup]
+[markup.highlight]
+  noClasses = false
+  lineNos = true
+[markup.goldmark.renderer]
+  unsafe = true
+
+[outputs]
+  home = ["HTML", "RSS", "JSON"]

@@ -5,15 +5,36 @@ theme: "hugo-tania"
 paginate: 6
 
 params:
+  # Emoji will show before the blog title on site navbar.
   titleEmoji: '😎'
-  socialOptions:
-    github: https://github.com/WingLim
-    email: email@example.com
+  
+  # Enable float footnotes.
+  # Default to true
   enableFootnotes: true
   sitename: "Hugo Tania is Amazing"
   sitedesc: "Hugo is Absurdly Fast!"
   author: "Hugo Tania"
 
+
+  # Limit how many categories filter show above search input.
+  # Default to 5
+  maxCategoryToShow: 10
+
+  # Show your socail information with icon on index bio with `_index.md` content.
+  socialOptions:
+    dev-to:
+    email:
+    facebook:
+    github:
+    instagram:
+    linkedin:
+    medium:
+    stack-overflow:
+    steam:
+    telegram:
+    twitter:
+    twitch:
+    whatsapp:
 
 menu:
   header:

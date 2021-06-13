@@ -1,12 +1,12 @@
 # Hugo Theme Tania
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/bae5db51-7cc6-41e2-9615-029ade8aa264/deploy-status)](https://app.netlify.com/sites/hugo-tania/deploys)
+
 A simple theme for bloggers.
 
 ## Demo
 
 [Example Site](https://hugo-tania.netlify.app/)
-
-[![Netlify Status](https://api.netlify.com/api/v1/badges/bae5db51-7cc6-41e2-9615-029ade8aa264/deploy-status)](https://app.netlify.com/sites/hugo-tania/deploys)
 
 ## Introduction
 Most of the styles for this theme come from [taniarascia.com](https://github.com/taniarascia/taniarascia.com)
@@ -19,13 +19,12 @@ Thank Tania Rascia again.
 
 ## Features
 
+- Responsive and Mobile-Friendly
 - Dark mode(It can switch automatically or manually)
 - Footnotes(Float on the right side)
 - Search with categories filter
 
-## Usage
-
-### Installation
+## Installation
 
 In your site's root dir
 
@@ -33,20 +32,45 @@ In your site's root dir
 git submodule add https://github.com/WingLim/hugo-tania themes/hugo-tania
 ```
 
-Edit your site config following `exampleSite/config.yaml`.
+Edit your site config following [exampleSite/config.yaml](https://github.com/WingLim/hugo-tania/blob/main/exampleSite/config.yaml).
 
-### Params
+## Configuration
 
-`titleEmoji` will show before the blog title on site navbar.
+### Menu
+
+You can custom header and footer menu.
 
 ```yaml
-titleEmoji: '😎'
+menu:
+  header:
+    - name: Articles
+      url: "/articles/"
+  footer:
+    - name: RSS
+      url: "/index.xml"
 ```
 
-`socialOptions` will show on index bio with `_index.md` content.
-Account with icon can set as below:
+### Site Configuration
+
+There are a few configuration options that you can add to your `config.yaml` file.
+
+You can also see the `toml` example [exampleSite/config.toml](https://github.com/WingLim/hugo-tania/blob/main/exampleSite/config.toml)
+
 ```yaml
-socialOptions:
+params:
+  # Emoji will show before the blog title on site navbar.
+  titleEmoji: '😎'
+  
+  # Enable float footnotes.
+  # Default to true
+  enableFootnotes: true
+
+  # Limit how many categories filter show above search input.
+  # Default to 5
+  maxCategoryToShow: 10
+
+  # Show your socail information with icon on index bio with `_index.md` content.
+  socialOptions:
     dev-to:
     email:
     facebook:
@@ -62,23 +86,15 @@ socialOptions:
     whatsapp:
 ```
 
-If you want to disable the float footnotes, add below params.
-```yaml
-enableFootnotes: false
-```
+## Layout
 
-Limit how many categories filter show above search input.
+### Archives
 
-Default is `5`
-```yaml
-maxCategoryToShow: 10
-```
-
-### Layout
-
-`articles` layout is for showing all articles you write.
+`archives` layout is for showing all articles you write.
 
 Add `articles.md` to site `content` dir, and write as below:
+
+If you want to show it on site header, see [#Menu](#menu)
 
 ```markdown
 ---
@@ -90,9 +106,9 @@ layout: "archives"
 ---
 ```
 
-### Article
+## Article Params
 
-#### Enable math formula render
+### Enable math formula render
 
 For enable math formula render, add `katex: true` or `mathjax: true` in your article head, like:
 
