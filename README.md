@@ -17,6 +17,17 @@ And is that why this theme called Tania.
 
 Thank Tania Rascia again.
 
+## Requirements
+
+It's necessary to use **Hugo ≥ 0.78.0**.
+
+Use Hugo Extended version (recommended) if you want to:
+
+- Use the latest feature/fix from master branch
+- Edit SCSS files
+
+**Compiled CSS are updated once per release.**
+
 ## Features
 
 - Responsive and Mobile-Friendly
