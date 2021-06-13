@@ -85,7 +85,7 @@ params:
     whatsapp:
 ```
 
-### Layout
+## Layout
 
 `archives` layout is for showing all articles you write.
 
@@ -101,9 +101,9 @@ layout: "archives"
 ---
 ```
 
-### Article
+## Article
 
-#### Enable math formula render
+### Enable math formula render
 
 For enable math formula render, add `katex: true` or `mathjax: true` in your article head, like:
 
