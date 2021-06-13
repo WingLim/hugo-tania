@@ -1,12 +1,12 @@
 # Hugo Theme Tania
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/bae5db51-7cc6-41e2-9615-029ade8aa264/deploy-status)](https://app.netlify.com/sites/hugo-tania/deploys)
+
 A simple theme for bloggers.
 
 ## Demo
 
 [Example Site](https://hugo-tania.netlify.app/)
-
-[![Netlify Status](https://api.netlify.com/api/v1/badges/bae5db51-7cc6-41e2-9615-029ade8aa264/deploy-status)](https://app.netlify.com/sites/hugo-tania/deploys)
 
 ## Introduction
 Most of the styles for this theme come from [taniarascia.com](https://github.com/taniarascia/taniarascia.com)
@@ -19,6 +19,7 @@ Thank Tania Rascia again.
 
 ## Features
 
+- Responsive and Mobile-Friendly
 - Dark mode(It can switch automatically or manually)
 - Footnotes(Float on the right side)
 - Search with categories filter
@@ -87,9 +88,13 @@ params:
 
 ## Layout
 
+### Archives
+
 `archives` layout is for showing all articles you write.
 
 Add `articles.md` to site `content` dir, and write as below:
+
+If you want to show it on site header, see [#Menu](#menu)
 
 ```markdown
 ---
@@ -101,7 +106,7 @@ layout: "archives"
 ---
 ```
 
-## Article
+## Article Params
 
 ### Enable math formula render
 
