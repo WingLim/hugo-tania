@@ -32,7 +32,7 @@ In your site's root dir
 git submodule add https://github.com/WingLim/hugo-tania themes/hugo-tania
 ```
 
-Edit your site config following `exampleSite/config.yaml`.
+Edit your site config following [exampleSite/config.yaml](https://github.com/WingLim/hugo-tania/blob/main/exampleSite/config.yaml).
 
 ## Configuration
 
@@ -54,7 +54,7 @@ menu:
 
 There are a few configuration options that you can add to your `config.yaml` file.
 
-You can also see the `toml` example [here](https://github.com/WingLim/hugo-tania/blob/main/exampleSite/config.toml)
+You can also see the `toml` example [exampleSite/config.toml](https://github.com/WingLim/hugo-tania/blob/main/exampleSite/config.toml)
 
 ```yaml
 params:
