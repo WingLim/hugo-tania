@@ -224,8 +224,65 @@ const searchResults = document.getElementById('search-results')
 const articles = document.getElementById('articles')
 searchInput.addEventListener("input", function () {
     let value = searchInput.value
-    executeSearch(value);
+    executeSearch(buildSearchValue(value), fuse);
 })
+
+let searchFilter = new Map()
+buildSearchValue = function(value) {
+    let filter = []
+    if (searchFilter.size == 0 && value == undefined) {
+        return ""
+    }
+    searchFilter.forEach((v, k) => {
+        let object = {}
+        if (v == "tags") {
+            object = {
+                tags: k
+            }
+        } else if (v == "categories") {
+            object = {
+                categories: k
+            }
+        }
+        filter.push(object)
+    })
+    if (value != undefined && value.length != 0) {
+        let orObject = {
+            $or: [
+                {title: value},
+                {content: value}
+            ]
+        }
+        filter.push(orObject)
+    }
+    return {
+        $and: filter
+    }
+}
+
+toggleCategory = function(element) {
+    let value = element.dataset.value
+    searchFilter.push(value)
+    if (element.classList.contains('active')) {
+        element.classList.remove('active')
+        executeSearch("", categoryFuse)
+    } else {
+        element.classList.add('active')
+        
+    }
+}
+filterSelect = function(element) {
+    let value = element.dataset.value
+    let type = element.dataset.type
+    if (element.classList.contains('active')) {
+        searchFilter.delete(value)
+        element.classList.remove('active')
+    } else {
+        searchFilter.set(value, type)
+        element.classList.add('active')
+    }
+    executeSearch(buildSearchValue())
+}
 
 executeSearch = function(value) {
     if (value.length != 0) {

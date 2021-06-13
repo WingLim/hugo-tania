@@ -15,14 +15,14 @@
     display: none;
 }
 
-.category-container {
+.filter-container {
     display: flex;
     justify-content: flex-start;
     margin-bottom: 1.5rem;
     flex-wrap: wrap;
 }
 
-.category-filter {
+.filter-item {
     font-size: .85rem;
     padding: .5rem .75rem;
     background: #ebf1fe;
@@ -31,4 +31,23 @@
     margin-bottom: .5rem;
     font-weight: 600;
     cursor: pointer;
+
+    &:hover {
+      background: #d8e3fd;
+      color: #3972f4
+    }
+
+    &:last-of-type {
+      margin-right: 0;
+    }
+
+    &.active {
+      background: #5183f5;
+      color: #fff;
+
+      &:hover {
+        color: #fff;
+        background: #2161f2
+      }
+    }
 }
