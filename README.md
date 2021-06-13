@@ -17,10 +17,11 @@ And is that why this theme called Tania.
 
 Thank Tania Rascia again.
 
-Here is some features:
+## Features
 
 - Dark mode(It can switch automatically or manually)
 - Footnotes(Float on the right side)
+- Search with categories filter
 
 ## Usage
 
