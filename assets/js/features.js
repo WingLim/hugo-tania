@@ -238,11 +238,7 @@ buildSearchValue = function(value) {
     }
     searchFilter.forEach((v, k) => {
         let object = {}
-        if (v == "tags") {
-            object = {
-                tags: k
-            }
-        } else if (v == "categories") {
+        if (v == "categories") {
             object = {
                 categories: k
             }
