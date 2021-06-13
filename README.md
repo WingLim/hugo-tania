@@ -23,9 +23,7 @@ Thank Tania Rascia again.
 - Footnotes(Float on the right side)
 - Search with categories filter
 
-## Usage
-
-### Installation
+## Installation
 
 In your site's root dir
 
@@ -35,18 +33,43 @@ git submodule add https://github.com/WingLim/hugo-tania themes/hugo-tania
 
 Edit your site config following `exampleSite/config.yaml`.
 
-### Params
+## Configuration
 
-`titleEmoji` will show before the blog title on site navbar.
+### Menu
+
+You can custom header and footer menu.
 
 ```yaml
-titleEmoji: '😎'
+menu:
+  header:
+    - name: Articles
+      url: "/articles/"
+  footer:
+    - name: RSS
+      url: "/index.xml"
 ```
 
-`socialOptions` will show on index bio with `_index.md` content.
-Account with icon can set as below:
+### Site Configuration
+
+There are a few configuration options that you can add to your `config.yaml` file.
+
+You can also see the `toml` example [here](https://github.com/WingLim/hugo-tania/blob/main/exampleSite/config.toml)
+
 ```yaml
-socialOptions:
+params:
+  # Emoji will show before the blog title on site navbar.
+  titleEmoji: '😎'
+  
+  # Enable float footnotes.
+  # Default to true
+  enableFootnotes: true
+
+  # Limit how many categories filter show above search input.
+  # Default to 5
+  maxCategoryToShow: 10
+
+  # Show your socail information with icon on index bio with `_index.md` content.
+  socialOptions:
     dev-to:
     email:
     facebook:
@@ -62,21 +85,9 @@ socialOptions:
     whatsapp:
 ```
 
-If you want to disable the float footnotes, add below params.
-```yaml
-enableFootnotes: false
-```
-
-Limit how many categories filter show above search input.
-
-Default is `5`
-```yaml
-maxCategoryToShow: 10
-```
-
 ### Layout
 
-`articles` layout is for showing all articles you write.
+`archives` layout is for showing all articles you write.
 
 Add `articles.md` to site `content` dir, and write as below:
 
