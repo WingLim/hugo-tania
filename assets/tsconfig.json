@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+      "target": "es2015",
       "baseUrl": ".",
       "paths": {
           "*": [
@@ -7,7 +8,4 @@
           ]
       },
   },
-  "lib": [
-    "es2015.promise",
-  ],
 }
