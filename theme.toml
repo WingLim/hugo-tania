@@ -13,7 +13,7 @@ tags = [
     "dark"
     ]
 features = ["darkmode"]
-min_version = "0.74.0"
+min_version = "0.78.0"
 
 [author]
     name = "WingLim"
