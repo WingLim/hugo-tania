@@ -3,9 +3,9 @@
         <div class="flex">
             <div>
                 <a class="brand" href="{{ relURL "/" }}">
-                    {{ if .Site.Params.titleEmoji }}
+                    {{ with .Site.Params.titleEmoji }}
                     <span class="emoji">
-                        {{ .Site.Params.titleEmoji }}
+                        {{ . | safeHTML }}
                     </span>
                     {{ end }}
                     {{ .Site.Title }}
