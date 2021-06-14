@@ -32,5 +32,5 @@ jobs:
           default_author: github_actions
           add: 'resources'
           message: "chore: update resources"
-          pull_strategy: '--rebase'
+          pull_strategy: 'NO-PULL'
           
