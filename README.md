@@ -71,6 +71,9 @@ You can also see the `toml` example in [exampleSite/config.example.toml](https:/
 params:
   # Emoji will show before the blog title on site navbar.
   titleEmoji: '😎'
+
+  # Logo will show before the blog title on site navbar.
+  titleLogo:
   
   # Enable float footnotes.
   # Default to true

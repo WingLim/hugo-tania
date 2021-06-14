@@ -5,8 +5,11 @@
                 <a class="brand" href="{{ relURL "/" }}">
                     {{ with .Site.Params.titleEmoji }}
                     <span class="emoji">
-                        {{ . | safeHTML }}
+                        {{ . }}
                     </span>
+                    {{ end }}
+                    {{ with .Site.Params.titleLogo }}
+                        <img src="{{ . }}" />
                     {{ end }}
                     {{ .Site.Title }}
                     </a>

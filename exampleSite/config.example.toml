@@ -6,7 +6,10 @@ paginate = 6
 
 [params]
   # Emoji will show before the blog title on site navbar.
-  titleEmoji  = '😎'
+  titleEmoji  = "😎"
+
+  # Logo will show before the blog title on site navbar.
+  titleLogo = ""
 
   # Enable float footnotes.
   # Default to true
