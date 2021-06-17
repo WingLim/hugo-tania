@@ -17,6 +17,15 @@ And is that why this theme called Tania.
 
 Thank Tania Rascia again.
 
+## Requirements
+
+It's necessary to use **Hugo ≥ 0.78.0**.
+
+Use Hugo Extended version (recommended) if you want to:
+
+- Use the latest feature/fix from main branch
+- Edit SCSS files
+
 ## Features
 
 - Responsive and Mobile-Friendly
@@ -54,12 +63,15 @@ menu:
 
 There are a few configuration options that you can add to your `config.yaml` file.
 
-You can also see the `toml` example [exampleSite/config.toml](https://github.com/WingLim/hugo-tania/blob/main/exampleSite/config.toml)
+You can also see the `toml` example in [exampleSite/config.example.toml](https://github.com/WingLim/hugo-tania/blob/main/exampleSite/config.example.toml)
 
 ```yaml
 params:
   # Emoji will show before the blog title on site navbar.
   titleEmoji: '😎'
+
+  # Logo will show before the blog title on site navbar.
+  titleLogo:
   
   # Enable float footnotes.
   # Default to true

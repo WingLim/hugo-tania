@@ -3,10 +3,13 @@
         <div class="flex">
             <div>
                 <a class="brand" href="{{ relURL "/" }}">
-                    {{ if .Site.Params.titleEmoji }}
+                    {{ with .Site.Params.titleEmoji }}
                     <span class="emoji">
-                        {{ .Site.Params.titleEmoji }}
+                        {{ . }}
                     </span>
+                    {{ end }}
+                    {{ with .Site.Params.titleLogo }}
+                        <img src="{{ . | relURL }}" />
                     {{ end }}
                     {{ .Site.Title }}
                     </a>
@@ -15,7 +18,10 @@
                 {{ range .Site.Menus.header }}
                 <a href="{{ .URL | relURL }}"{{ if eq .URL $.RelPermalink }} aria-current="page"{{ end }}>{{ .Pre }}{{ .Name }}{{ .Post }}</a>
                 {{ end }}
-                <button id="dark-mode-button"></button>
+                <button id="dark-mode-button">
+                  {{ (resources.Get "icons/light.svg").Content | safeHTML }}
+                  {{ (resources.Get "icons/dark.svg").Content | safeHTML }}
+                </button>
             </div>
             </div>
     </div>

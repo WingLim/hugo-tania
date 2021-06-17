@@ -153,9 +153,22 @@ main {
     font-size: 1.1rem;
     background: transparent;
 
+    .dark {
+      display: none;
+    }
+
     &:focus {
         outline: none;
     }
+}
+
+[data-user-color-scheme] #dark-mode-button {
+  .light {
+    display: none;
+  }
+  .dark {
+    display: unset;
+  }
 }
 
 @media screen and (min-width: 800px) {

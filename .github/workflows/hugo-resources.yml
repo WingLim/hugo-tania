@@ -1,0 +1,36 @@
+name: Build Hugo Resources
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '**/*.scss'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Hugo setup
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: latest
+          extended: true
+      
+      - name: Generate hugo site
+        run: cd exampleSite && hugo --gc --themesDir ../..
+      
+      - name: Copy resources
+        run: cp -r exampleSite/resources .
+      
+      - name: Commit & Push resources
+        uses: EndBug/add-and-commit@v7
+        with:
+          default_author: github_actions
+          add: 'resources'
+          message: "chore: update resources"
+          pull_strategy: 'NO-PULL'
+          

@@ -11,7 +11,7 @@
     float: right;
     clear: right;
     margin-right: calc(-200px - 2em);
-    background-color: #fff;
+    background-color: var(--background);
 
     p {
         font-size: .9rem;

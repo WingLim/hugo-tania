@@ -7,7 +7,11 @@
                     <h1>{{ .Title }}</h1>
                     <div class="post-meta">
                         <div>
-                            By {{ .Params.author }} on <time>{{ .Date.Format "January 02, 2006" }}</time>
+                            {{ $author := .Params.author }}
+                            {{ if eq $author nil }}
+                              {{ $author = .Site.Params.author }}
+                            {{ end }}
+                            By {{ $author  }} on <time>{{ .Date.Format "January 02, 2006" }}</time>
                         </div>
                         <div class="tags">
                             {{ range (.GetTerms "tags") }}

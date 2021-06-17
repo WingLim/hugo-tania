@@ -1,5 +1,4 @@
 ---
-author: Hugo Authors
 title: Footnote test
 categories:
 - syntax
