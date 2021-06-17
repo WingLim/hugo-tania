@@ -11,7 +11,8 @@
                             {{ if eq $author nil }}
                               {{ $author = .Site.Params.author }}
                             {{ end }}
-                            By {{ $author  }} on <time>{{ .Date.Format "January 02, 2006" }}</time>
+                            By {{ $author  }} | <time>{{ .Date.Format "January 02, 2006" }}</time>
+                            | {{ .ReadingTime }} minutes
                         </div>
                         <div class="tags">
                             {{ range (.GetTerms "tags") }}
