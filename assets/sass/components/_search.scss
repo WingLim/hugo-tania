@@ -3,14 +3,17 @@
     background: var(--light-background);
     color:var(--input-color);
     border: 2px solid var(--border);
+    outline: none;
     width: 100%;
     border-radius: .35rem;
     font-size: 1rem;
-    -webkit-appearance: none;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 4rem;
-    outline-offset: 0;
+
+    &:focus {
+        border-color: #5183f5;
+    }
 }
 
 #search-results {
