@@ -1,6 +1,7 @@
 #search-query {
     padding: .8rem 1rem;
     background: var(--light-background);
+    color:var(--input-color);
     border: 2px solid var(--border);
     width: 100%;
     border-radius: .35rem;
@@ -26,7 +27,7 @@
 .filter-item {
     font-size: .85rem;
     padding: .5rem .75rem;
-    background: #ebf1fe;
+    background: var(--light-background);
     border-radius: 4px;
     margin-right: .5rem;
     margin-bottom: .5rem;
