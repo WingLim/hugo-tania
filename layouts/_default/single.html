@@ -49,11 +49,11 @@
     </nav>
     {{ end }}
 </div>
-<div class="container">
 {{ if or (not (isset .Params "comments")) (eq .Params.comments "true")}} 
+<div class="container">
     {{ partial "comments/include" . }}
-{{ end }}
 </div>
+{{ end }}
 </main>
 
 {{ end }}
