@@ -14,7 +14,7 @@
         <div class="filter-container">
           {{ $maxCategoryToShow := $.Site.Params.maxCategoryToShow | default 5 }}
           {{ range .Site.Taxonomies.categories.TaxonomyArray | first $maxCategoryToShow }}
-            <div class="filter-item" data-value="{{ .Page.Title }}" data-type="categories" onclick="filterSelect(this)">
+            <div class="filter-item" data-value="{{ .Page.Title }}" data-type="categories">
               {{ .Page.Title }}<sup>{{ .Count }}</sup>
             </div>
           {{ end }}
