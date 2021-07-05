@@ -162,7 +162,7 @@ main {
     }
 }
 
-[data-user-color-scheme] #dark-mode-button {
+[data-user-color-scheme="dark"] #dark-mode-button {
   .light {
     display: none;
   }
