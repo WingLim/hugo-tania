@@ -1,3 +1,5 @@
+import ThemeColorScheme from "ts/colorScheme";
+
 (function (d) {
     let enableFootnotes = false
     if (d.currentScript) {
@@ -76,103 +78,12 @@ let renderAnchor = function () {
     }
 }();
 
-let switchDarkMode = function () {
-    const rootElement = document.documentElement; // <html>
-    const darkModeStorageKey = 'user-color-scheme'; // use as localStorage's key
-    const rootElementDarkModeAttributeName = 'data-user-color-scheme';
-    const darkModeTogglebuttonElement = document.getElementById('dark-mode-button');
+const init = () => {
+    new ThemeColorScheme(document.getElementById('dark-mode-button'))
+}
 
-    const setLS = (k: string, v: string) => {
-        try {
-            localStorage.setItem(k, v);
-        } catch (e) { }
-    }
-
-    const removeLS = (k: string) => {
-        try {
-            localStorage.removeItem(k);
-        } catch (e) { }
-    }
-
-    const getLS = (k: string) => {
-        try {
-            return localStorage.getItem(k);
-        } catch (e) {
-            return null // the same as localStorage.getItem() get nothing
-        }
-    }
-
-    const dispatchEvent = (mode: string) => {
-        const event = new CustomEvent('onColorSchemeChange', {
-            detail: mode
-        })
-        window.dispatchEvent(event)
-    }
-
-    const getModeFromCSSMediaQuery = () => {
-        // use matchMedia API
-        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
-    }
-
-    const resetRootDarkModeAttributeAndLS = () => {
-        rootElement.removeAttribute(rootElementDarkModeAttributeName);
-        removeLS(darkModeStorageKey);
-    }
-
-    const validColorModeKeys = {
-        'dark': true,
-        'light': true
-    }
-
-    const applyCustomDarkModeSettings = (mode?: string) => {
-        // receive user's operation or get previous mode from localStorage
-        const currentSetting = mode || getLS(darkModeStorageKey);
-        if (currentSetting === getModeFromCSSMediaQuery()) {
-            // When the user selected mode equal prefers-color-scheme 
-            // reset and restored to automatic mode
-            resetRootDarkModeAttributeAndLS();
-        } else if (validColorModeKeys[currentSetting]) {
-            rootElement.setAttribute(rootElementDarkModeAttributeName, currentSetting);
-        } else {
-            // If the switch is accessed for the first time or never used, 
-            // and there is no stored value in localstorage,
-            // or currentsetting is null
-            // Or localstorage has been tampered with and currentsetting is not a legal value
-            resetRootDarkModeAttributeAndLS();
-        }
-    }
-
-    const invertDarkModeObj = {
-        'dark': 'light',
-        'light': 'dark'
-    }
-
-    const toggleCustomDarkMode = () => {
-        let currentSetting = getLS(darkModeStorageKey);
-
-        if (validColorModeKeys[currentSetting]) {
-            // get mode from localStorage and set the opposite
-            currentSetting = invertDarkModeObj[currentSetting];
-        } else if (currentSetting === null) {
-            // if get null from localStorage
-            // get mode from prefers-color-scheme and set the opposite
-            currentSetting = invertDarkModeObj[getModeFromCSSMediaQuery()];
-        } else {
-            // get anything error, return
-            return;
-        }
-        dispatchEvent(currentSetting)
-        // set opposite mode into localStorage
-        setLS(darkModeStorageKey, currentSetting);
-
-        return currentSetting;
-    }
-
-    // when page loaded set page mode
-    applyCustomDarkModeSettings();
-
-    darkModeTogglebuttonElement.addEventListener('click', () => {
-        // handle user click switch dark mode button
-        applyCustomDarkModeSettings(toggleCustomDarkMode());
-    })
-}();
+window.addEventListener('load', () => {
+    setTimeout(function () {
+        init()
+    }, 0)
+})
