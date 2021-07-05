@@ -12,12 +12,12 @@ interface searchItem {
     refIndex: number
 }
 
-const show = function (elem: HTMLElement) {
-    elem.style.display = 'block';
+const show = function (el: HTMLElement) {
+    el.style.display = 'block';
 };
 
-const hide = function (elem: HTMLElement) {
-    elem.style.display = 'none';
+const hide = function (el: HTMLElement) {
+    el.style.display = 'none';
 };
 
 class Search {
@@ -68,7 +68,7 @@ class Search {
     }
 
     private bindInput() {
-        this.searchInput.addEventListener("input", (e) => {
+        this.searchInput.addEventListener("input", () => {
             let value = this.searchInput.value;
             this.executeSearch(this.buildSearchValue(value));
         })
@@ -76,7 +76,7 @@ class Search {
 
     private bindFilters() {
         Array.from(this.filterItems).forEach((el) => {
-            el.addEventListener('click', (e) => {
+            el.addEventListener('click', () => {
                 this.filterSelect(el)
             })
         })
@@ -147,15 +147,15 @@ class Search {
         }
     }
 
-    private filterSelect(element: HTMLElement) {
-        let value = element.dataset.value;
-        let type = element.dataset.type;
-        if (element.classList.contains('active')) {
+    private filterSelect(el: HTMLElement) {
+        let value = el.dataset.value;
+        let type = el.dataset.type;
+        if (el.classList.contains('active')) {
             this.searchFilter.delete(value);
-            element.classList.remove('active');
+            el.classList.remove('active');
         } else {
             this.searchFilter.set(value, type);
-            element.classList.add('active');
+            el.classList.add('active');
         }
         this.executeSearch(this.buildSearchValue(""));
     }
