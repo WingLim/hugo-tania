@@ -102,6 +102,13 @@ let switchDarkMode = function () {
         }
     }
 
+    const dispatchEvent = (mode: string) => {
+        const event = new CustomEvent('onColorSchemeChange', {
+            detail: mode
+        })
+        window.dispatchEvent(event)
+    }
+
     const getModeFromCSSMediaQuery = () => {
         // use matchMedia API
         return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
@@ -154,6 +161,7 @@ let switchDarkMode = function () {
             // get anything error, return
             return;
         }
+        dispatchEvent(currentSetting)
         // set opposite mode into localStorage
         setLS(darkModeStorageKey, currentSetting);
 
