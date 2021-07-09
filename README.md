@@ -65,6 +65,8 @@ There are a few configuration options that you can add to your `config.yaml` fil
 
 You can also see the `toml` example in [exampleSite/config.example.toml](https://github.com/WingLim/hugo-tania/blob/main/exampleSite/config.example.toml)
 
+Notice: if you want use disqus as comment system in this theme, you need to set `disqusShortname` in `config` root and `comments` in `params`.
+
 ```yaml
 params:
   # Emoji will show before the blog title on site navbar.
@@ -101,6 +103,11 @@ params:
   siteName:
   siteDesc: 
   author: 
+
+  # Comments settings
+  comments:
+    enable: true
+    provider: disqus
 ```
 
 ## Layout
@@ -142,8 +149,8 @@ Some content...
 ```
 
 ## Thanks to
-- [你好黑暗，我的老朋友 —— 为网站添加用户友好的深色模式支持](https://blog.skk.moe/post/hello-darkmode-my-old-friend/)
-- [Footnotes, citations, and sidenotes](https://prose.yihui.org/about/#footnotes-citations-and-sidenotes)
+- [hugo-theme-stack](https://github.com/CaiJimmy/hugo-theme-stack) for dark mode switch
+- [hugo-prose](https://github.com/yihui/hugo-prose) for float footnotes
 
 ## License
 

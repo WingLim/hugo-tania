@@ -4,6 +4,8 @@ title: "Hugo Tania"
 theme: "hugo-tania"
 paginate: 6
 
+disqusShortname: https-hugo-tania-netlify-app
+
 params:
   # Emoji will show before the blog title on site navbar.
   titleEmoji:
@@ -38,6 +40,11 @@ params:
     twitter:
     twitch:
     whatsapp:
+  
+  # Comments settings
+  comments:
+    enabled: true
+    provider: disqus
 
 menu:
   header:
