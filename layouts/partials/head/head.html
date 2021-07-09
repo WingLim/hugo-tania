@@ -6,6 +6,9 @@
     <meta name="theme-color" content="dark">
     <title>{{with.Title}}{{.}} | {{end}}{{.Site.Title}}</title>
 
+    {{ template "_internal/google_analytics.html" . }}
+    {{ template "_internal/google_analytics_async.html" . }}
+    
     <meta property="og:site_name" content="{{.Site.Params.siteName}}" />
     <meta property="og:title" content="{{with.Title}}{{.}} | {{end}}{{.Site.Title}}"/>
     <meta itemprop="name" content="{{with.Title}}{{.}} | {{end}}{{.Site.Title}}" />
