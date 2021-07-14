@@ -1,59 +1,35 @@
-baseurl: "https://example.com"
-languageCode: "en-us"
-title: "Hugo Tania"
-theme: "hugo-tania"
+---
+baseurl: https://example.com
+languageCode: en-us
+title: Hugo Tania
+theme: hugo-tania
 paginate: 6
-
 disqusShortname: https-hugo-tania-netlify-app
-
 params:
-  # Emoji will show before the blog title on site navbar.
-  titleEmoji:
-
-  # Logo will show before the blog title on site navbar.
+  titleEmoji: 
   titleLogo: favicon.ico
-  
-  # Enable float footnotes.
-  # Default to true
   enableFootnotes: true
-  siteName: "Hugo Tania is Amazing"
-  siteDesc: "Hugo is Absurdly Fast!"
-  author: "Hugo Tania"
-
-
-  # Limit how many categories filter show above search input.
-  # Default to 5
+  siteName: Hugo Tania is Amazing
+  siteDesc: Hugo is Absurdly Fast!
+  author: Hugo Tania
   maxCategoryToShow: 10
-
-  # Show your socail information with icon on index bio with `_index.md` content.
   socialOptions:
-    dev-to:
-    email:
-    facebook:
-    github:
-    instagram:
-    linkedin:
-    medium:
-    stack-overflow:
-    steam:
-    telegram:
-    twitter:
-    twitch:
-    whatsapp:
-  
-  # Comments settings
+    dev-to: 
+    email: 
+    facebook: 
+    github: 
+    instagram: 
+    linkedin: 
+    medium: 
+    stack-overflow: 
+    steam: 
+    telegram: 
+    twitter: 
+    twitch: 
+    whatsapp: 
   comments:
     enabled: true
     provider: disqus
-
-menu:
-  header:
-    - name: Articles
-      url: "/articles/"
-  footer:
-    - name: RSS
-      url: "/index.xml"
-
 markup:
   highlight:
     noClasses: false
@@ -61,6 +37,8 @@ markup:
   goldmark:
     renderer:
       unsafe: true
-
 outputs:
-  home: ["HTML", "RSS", "JSON"]
+  home:
+  - HTML
+  - RSS
+  - JSON
