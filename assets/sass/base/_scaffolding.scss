@@ -104,7 +104,11 @@ img {
     height: auto;
 }
 
-p,
+p {
+    font-size: 1.05rem;
+    margin: 0;   
+}
+
 ol,
 ul,
 dl,
