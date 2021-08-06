@@ -44,7 +44,6 @@ section>h2 {
 }
 
 @media screen and (min-width: 800px) {
-
     .index h2,
     section>h2 {
         border-bottom-width: 4px;
@@ -114,12 +113,15 @@ blockquote {
     margin: 0 0 1.5rem 0;
 }
 
+blockquote p {
+    margin: 0;
+}
+
 ul {
     padding: 0 1rem;
 }
 
 @media screen and (min-width: 800px) {
-
     p,
     ol,
     ul,
