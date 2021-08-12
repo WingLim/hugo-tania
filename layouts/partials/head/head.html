@@ -26,4 +26,5 @@
     <link rel="shortcut icon" type="image/x-icon" href="{{ "favicon.ico" | relURL }}" />
     {{ $style := resources.Get "sass/main.scss" | toCSS | minify | fingerprint }}
     <link rel="stylesheet" href="{{ $style.RelPermalink }}">
+    {{ partial "head/custom.html" . }}
 </head>
