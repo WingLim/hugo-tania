@@ -110,6 +110,46 @@ params:
     provider: disqus
 ```
 
+## Custom
+
+### Custom font-family
+
+We have 5 variables to custom font-family in [_variables.scss](https://github.com/WingLim/hugo-tania/blob/main/assets/sass/base/_variables.scss):
+
+```css
+:root {
+    --sys-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Droid Sans", "Helvetica Neue";
+    --zh-font-family: "PingFang SC", "Hiragino Sans GB", "Droid Sans Fallback", "Microsoft YaHei";
+    --base-font-family: var(--sys-font-family), var(--zh-font-family);
+    --code-font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+    --article-font-family: var(--base-font-family);
+}
+```
+
+
+Create file `layouts/partials/head/custom.html` in your site root directory.
+
+```html
+<style>
+    :root {
+        --article-font-family: "Noto Serif SC", var(--base-font-family);
+    }
+</style>
+
+<!-->This script use to load font from outside<-->
+<script>
+		(function () {
+		    const customFont = document.createElement('link');
+		    customFont.href = "https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&display=swap";
+		
+		    customFont.type = "text/css";
+		    customFont.rel = "stylesheet";
+		
+		    document.head.appendChild(customFont);
+		}());
+</script>
+```
+
 ## Layout
 
 ### Archives
