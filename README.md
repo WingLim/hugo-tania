@@ -131,22 +131,22 @@ Create file `layouts/partials/head/custom.html` in your site root directory.
 
 ```html
 <style>
-    :root {
-        --article-font-family: "Noto Serif SC", var(--base-font-family);
-    }
+  :root {
+      --article-font-family: "Noto Serif SC", var(--base-font-family);
+  }
 </style>
 
 <!-->This script use to load font from outside<-->
 <script>
-		(function () {
-		    const customFont = document.createElement('link');
-		    customFont.href = "https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&display=swap";
-		
-		    customFont.type = "text/css";
-		    customFont.rel = "stylesheet";
-		
-		    document.head.appendChild(customFont);
-		}());
+  (function () {
+      const customFont = document.createElement('link');
+      customFont.href = "https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&display=swap";
+
+      customFont.type = "text/css";
+      customFont.rel = "stylesheet";
+
+      document.head.appendChild(customFont);
+  }());
 </script>
 ```
 
