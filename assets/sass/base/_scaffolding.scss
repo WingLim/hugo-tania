@@ -1,9 +1,7 @@
 /* Scaffolding */
 
 html {
-    font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Roboto',
-        Roboto, Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI',
-        'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    font-family: var(--base-font-family);
     color: var(--font-color);
     font-weight: 400;
     font-size: 1rem;

@@ -19,3 +19,11 @@
     --transparent-bg: rgba(0, 0, 0, 0.05);
     --light-transparent-bg: rgba(255, 255, 255, 0.1);
 }
+
+:root {
+    --sys-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Droid Sans", "Helvetica Neue";
+    --zh-font-family: "PingFang SC", "Hiragino Sans GB", "Droid Sans Fallback", "Microsoft YaHei";
+    --base-font-family: var(--sys-font-family), var(--zh-font-family);
+    --code-font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+    --article-font-family: var(--base-font-family);
+}
