@@ -1,5 +1,23 @@
 {{- if strings.HasPrefix .Destination "http" -}}
-  <img loading="lazy" src="{{ .Destination | safeURL }}" alt="{{ .Text }}" {{ with .Title}} title="{{ . }}"{{ end }} />
+  <img loading="lazy" 
+    src="{{ .Destination | safeURL }}" 
+    alt="{{ .Text }}" 
+    {{ with .Title}} title="{{ . }}"{{ end }} />
 {{- else -}}
-  <img loading="lazy" src="{{ .Destination | safeURL }}" alt="{{ .Text }}" {{ with .Title}} title="{{ . }}"{{ end }} {{ with imageConfig ( printf "static/%s" .Destination ) }} width={{ .Width }} height="{{ .Height }}" {{ end }} />
+  {{- $image := .Page.Resources.GetMatch (printf "%s" (.Destination | safeURL)) -}}
+  {{- $permalink := "" -}}
+
+  {{- if ne $image nil -}}
+  {{- $permalink = $image.RelPermalink -}}
+  {{- else -}}
+  {{- $image = imageConfig (printf "static/%s" (.Destination | safeURL)) -}}
+  {{- $permalink = (printf "/%s" (.Destination | safeURL)) -}}
+  {{- end -}}
+
+  <img loading="lazy" 
+    src="{{ $permalink }}" 
+    alt="{{ .Text }}" 
+    {{ with .Title}} title="{{ . }}"{{ end }} 
+    width={{ $image.Width }} 
+    height="{{ $image.Height }}"  />
 {{- end -}}
