@@ -1,7 +1,7 @@
 baseurl = "https://example.com"
 languageCode = "en-us"
-title = "Hugo Tania"
-theme = "hugo-tania"
+title = "ANOUAR AISSAOUI"
+theme = "ANOUAR AISSAOUI"
 paginate = 6
 
 disqusShortname = "https-hugo-tania-netlify-app"
