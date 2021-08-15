@@ -1,7 +1,7 @@
 baseurl: "https://example.com"
 languageCode: "en-us"
-title: "anouar aissaoui"
-theme: "anouar aissaoui"
+title: "Anouar Aissaoui"
+theme: "Anouar Aissaoui"
 paginate: 6
 
 disqusShortname: https-hugo-tania-netlify-app
@@ -30,7 +30,7 @@ params:
     email:
     facebook:
     github:
-    instagram:
+    instagram:Faluzes
     linkedin:
     medium:
     stack-overflow:
