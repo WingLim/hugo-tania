@@ -1,7 +1,7 @@
 baseurl: "https://example.com"
 languageCode: "en-us"
-title: "Hugo Tania"
-theme: "hugo-tania"
+title: "anouar aissaoui"
+theme: "anouar aissaoui"
 paginate: 6
 
 disqusShortname: https-hugo-tania-netlify-app
@@ -19,7 +19,6 @@ params:
   siteName: "Hugo Tania is Amazing"
   siteDesc: "Hugo is Absurdly Fast!"
   author: "Hugo Tania"
-
 
   # Limit how many categories filter show above search input.
   # Default to 5
