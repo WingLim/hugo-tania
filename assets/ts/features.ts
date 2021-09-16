@@ -1,4 +1,5 @@
-import ThemeColorScheme from "ts/colorScheme";
+import ThemeColorScheme from "ts/colorScheme"
+import { renderCopyButton } from "ts/copyButton"
 import { renderFootnotes } from "ts/footnotes"
 
 let enableFootnotes = false
@@ -11,6 +12,7 @@ const init = () => {
     if (enableFootnotes) {
         renderFootnotes()
     }
+    renderCopyButton()
 }
 
 window.addEventListener('load', () => {
