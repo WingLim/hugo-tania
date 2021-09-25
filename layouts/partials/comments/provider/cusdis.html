@@ -1,8 +1,13 @@
-<div id="cusdis_thread" data-host="https://cusdis.com"
-        data-app-id="{{ .Site.Params.comments.cusdis.id }}"
-        data-page-id="{{ .File.UniqueID }}"
-        data-page-url="{{ .Permalink }}"
-        data-page-title="{{ .Title }}"></div>
+<div id="cusdis_thread"
+    {{ if .Site.Params.comments.cusdis.host }}
+    data-host="{{ .Site.Params.comments.cusdis.host }}"
+    {{ else }}
+    data-host="https://cusdis.com"
+    {{ end }}
+    data-app-id="{{ .Site.Params.comments.cusdis.id }}"
+    data-page-id="{{ .File.UniqueID }}"
+    data-page-url="{{ .Permalink }}"
+    data-page-title="{{ .Title }}"></div>
 <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
 
 <script>
