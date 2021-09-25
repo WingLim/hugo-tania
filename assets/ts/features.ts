@@ -3,8 +3,10 @@ import { renderCopyButton } from "ts/copyButton"
 import { renderFootnotes } from "ts/footnotes"
 
 let enableFootnotes = false
+let enableLineNos = false
 if (document.currentScript) {
     enableFootnotes = document.currentScript.dataset.enableFootnotes == 'true'
+    enableLineNos = document.currentScript.dataset.enableLinenos == 'true'
 }
 
 const init = () => {
@@ -12,7 +14,7 @@ const init = () => {
     if (enableFootnotes) {
         renderFootnotes()
     }
-    renderCopyButton()
+    renderCopyButton(enableLineNos)
 }
 
 window.addEventListener('load', () => {
