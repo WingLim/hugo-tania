@@ -4,13 +4,11 @@
 
 A simple theme for bloggers.
 
+[Documenttation](https://github.com/WingLim/hugo-tania/wiki)
+
 ## Demo
 
 [Example Site](https://hugo-tania.netlify.app/)
-
-## Documentation
-
-[Documenttation](https://github.com/WingLim/hugo-tania/wiki)
 
 ## Introduction
 
