@@ -66,7 +66,7 @@ class ThemeColorScheme {
             document.documentElement.dataset.userColorScheme = 'light';
         }
 
-        this.dispatchEvent(document.documentElement.dataset.scheme as colorScheme);
+        this.dispatchEvent(document.documentElement.dataset.userColorScheme as colorScheme);
     }
 
     private getSavedScheme(): colorScheme {
