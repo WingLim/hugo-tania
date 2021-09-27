@@ -16,11 +16,6 @@ params:
   # Enable float footnotes.
   # Default to true
   enableFootnotes: true
-
-  # Enable line numbers, it need to set the same value with
-  # markup.hightlight.lineNos
-  # Default to false
-  enableLineNos: true
   
   siteName: "Hugo Tania is Amazing"
   siteDesc: "Hugo is Absurdly Fast!"
