@@ -38,9 +38,9 @@ Use Hugo Extended version (recommended) if you want to:
 
 ## Installation
 
-1. Add `hugo-tania` them as submodule.
+`cd` into your site's root dir.
 
-In your site's root dir
+1. Add `hugo-tania` them as submodule.
 
 ```bash
 git submodule add https://github.com/WingLim/hugo-tania themes/hugo-tania
