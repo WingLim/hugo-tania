@@ -38,10 +38,24 @@ Use Hugo Extended version (recommended) if you want to:
 
 ## Installation
 
-In your site's root dir
+`cd` into your site's root dir.
+
+1. Add `hugo-tania` them as submodule.
 
 ```bash
 git submodule add https://github.com/WingLim/hugo-tania themes/hugo-tania
+```
+
+2. Add `articles` page with [archives](https://github.com/WingLim/hugo-tania/wiki/Layout#archives) layout.
+
+```bash
+cat > content/articles.md <<EOF
+---
+title: Articles
+subtitle: Posts, tutorials, snippets, musings, and everything else.
+layout: "archives"
+---
+EOF
 ```
 
 Edit your site config following [exampleSite/config.yaml](https://github.com/WingLim/hugo-tania/blob/main/exampleSite/config.yaml).
