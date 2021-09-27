@@ -5,7 +5,7 @@ const codeBlocks = document.querySelectorAll('.article-post .highlight');
 const copyText = `Copy`,
     copiedText = `Copied!`;
 
-export let renderCopyButton = function(enableLineNos: boolean) {
+export let renderCopyButton = function() {
     codeBlocks.forEach(codeBlock => {
         const copyButton = document.createElement('button')
         copyButton.innerHTML = copyText
@@ -16,7 +16,7 @@ export let renderCopyButton = function(enableLineNos: boolean) {
         // This theme's code block has line number, so the second is where the
         // real code locate
         let codeIndex = 0
-        if (enableLineNos) {
+        if (pre.length == 2) {
             codeIndex = 1
         }
         const code = pre[codeIndex].textContent;
