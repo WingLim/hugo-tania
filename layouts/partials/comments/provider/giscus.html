@@ -1,0 +1,52 @@
+<script src="https://giscus.app/client.js" 
+        data-repo="{{ .Site.Params.comments.giscus.repo }}"
+        data-repo-id="{{ .Site.Params.comments.giscus.id }}"
+        {{ with .Site.Params.comments.giscus.category }}
+        data-category="{{ .name }}"
+        data-category-id="{{ .id }}"
+        {{ end }}
+        data-mapping="pathname"
+        {{ with .Site.Params.comments.giscus.reactionsEnabled }}
+        data-reactions-enabled="1"
+        {{ end }}
+        {{ with .Site.Params.comments.giscus.emitMetadata }}
+        data-emit-metadata="1"
+        {{ end }}
+        data-theme="light"
+        crossorigin="anonymous"
+        async
+        >
+</script>
+
+<style>
+    .giscus {
+        max-width: unset;
+    }
+</style>
+
+<script>
+    function setGiscusTeheme(theme) {
+        let giscus = document.querySelector('.giscus iframe');
+        if (giscus) {
+            giscus.contentWindow.postMessage(
+                {
+                    giscus: {
+                        setConfig: {
+                            theme: theme
+                        }
+                    }
+                },
+                'https://giscus.app'
+            )
+        }
+    }
+
+    addEventListener('message', event => {
+        if (event.origin !== 'https://giscus.app') return;
+        setGiscusTeheme(document.documentElement.dataset.userColorScheme)
+    });
+
+    window.addEventListener('onColorSchemeChange', (e) => {
+        setGiscusTeheme(e.detail)
+    })
+</script>
