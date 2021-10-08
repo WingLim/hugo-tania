@@ -5,7 +5,7 @@
         data-category="{{ .name }}"
         data-category-id="{{ .id }}"
         {{ end }}
-        data-mapping="{{ .Site.Params.comments.giscus.mapping | default pathname }}"
+        data-mapping="{{ .Site.Params.comments.giscus.mapping | default "pathname" }}"
         data-reactions-enabled="{{ .Site.Params.comments.giscus.reactionsEnabled | default 1 }}"
         data-emit-metadata="{{ .Site.Params.comments.giscus.emitMetadata | default 0 }}"
         data-theme="light"
