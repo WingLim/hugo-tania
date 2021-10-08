@@ -6,12 +6,8 @@
         data-category-id="{{ .id }}"
         {{ end }}
         data-mapping="pathname"
-        {{ with .Site.Params.comments.giscus.reactionsEnabled }}
-        data-reactions-enabled="1"
-        {{ end }}
-        {{ with .Site.Params.comments.giscus.emitMetadata }}
-        data-emit-metadata="1"
-        {{ end }}
+        data-reactions-enabled="{{ .Site.Params.comments.giscus.reactionsEnabled | default 1 }}"
+        data-emit-metadata="{{ .Site.Params.comments.giscus.emitMetadata | default 0 }}"
         data-theme="light"
         crossorigin="anonymous"
         async
