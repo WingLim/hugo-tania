@@ -40,7 +40,7 @@ Use Hugo Extended version (recommended) if you want to:
 
 `cd` into your site's root dir.
 
-1. Add `hugo-tania` them as submodule.
+1. Add `hugo-tania` theme as submodule.
 
 ```bash
 git submodule add https://github.com/WingLim/hugo-tania themes/hugo-tania
