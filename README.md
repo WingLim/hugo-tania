@@ -4,7 +4,7 @@
 
 A simple theme for bloggers.
 
-[Documenttation](https://github.com/WingLim/hugo-tania/wiki)
+[Documentation](https://github.com/WingLim/hugo-tania/wiki)
 
 ## Demo
 
