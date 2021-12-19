@@ -1,3 +1,24 @@
+{{- $defaultColorScheme := default "auto" .Site.Params.colorScheme.default -}}
+{{- if not (default false .Site.Params.colorScheme.toggle) -}}
+    {{/* If toggle is disabled, force default scheme */}}
+    <script>
+        (function() {
+            const colorSchemeKey = 'ThemeColorScheme';
+            localStorage.setItem(colorSchemeKey, "{{ $defaultColorScheme }}");
+        })();
+    </script>
+{{- else -}}
+    {{/* Otherwise set to default scheme only if no preference is set by user */}}
+    <script>
+        (function() {
+            const colorSchemeKey = 'ThemeColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "{{ $defaultColorScheme }}");
+            }
+        })();
+    </script>
+{{- end -}}
+
 <script>
     (function() {
         const colorSchemeKey = 'ThemeColorScheme';

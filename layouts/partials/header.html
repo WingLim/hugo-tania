@@ -18,10 +18,12 @@
                 {{ range .Site.Menus.header }}
                 <a href="{{ .URL | relURL }}"{{ if eq .URL $.RelPermalink }} aria-current="page"{{ end }}>{{ .Pre }}{{ .Name }}{{ .Post }}</a>
                 {{ end }}
-                <button id="dark-mode-button">
-                  {{ (resources.Get "icons/light.svg").Content | safeHTML }}
-                  {{ (resources.Get "icons/dark.svg").Content | safeHTML }}
-                </button>
+                {{ if (default false .Site.Params.colorScheme.toggle) }}
+                    <button id="dark-mode-button">
+                    {{ (resources.Get "icons/light.svg").Content | safeHTML }}
+                    {{ (resources.Get "icons/dark.svg").Content | safeHTML }}
+                    </button>
+                {{ end }}
             </div>
             </div>
     </div>
