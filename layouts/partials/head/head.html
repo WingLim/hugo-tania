@@ -15,7 +15,25 @@
     <meta name="twitter:title" content="{{with.Title}}{{.}} | {{end}}{{.Site.Title}}" />
     <meta name="application-name" content="{{with.Title}}{{.}} | {{end}}{{.Site.Title}}" />
 
-    {{ template "_internal/twitter_cards.html" . }}
+    {{- with $.Params.images -}}
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:image" content="{{ index . 0 | absURL }}"/>
+    {{ else -}}
+    {{- $images := $.Resources.ByType "image" -}}
+    {{- $featured := $images.GetMatch "*feature*" -}}
+    {{- if not $featured }}{{ $featured = $images.GetMatch "{*cover*,*thumbnail*}" }}{{ end -}}
+    {{- with $featured -}}
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:image" content="{{ $featured.Permalink }}"/>
+    {{- else -}}
+    {{- with $.Site.Params.images -}}
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:image" content="{{ index . 0 | absURL }}"/>
+    {{ else -}}
+    <meta name="twitter:card" content="summary"/>
+    {{- end -}}
+    {{- end -}}
+    {{- end }}
 
     <meta name="description" content="{{ if .Description }}{{.Description}}{{ else }}{{.Site.Params.siteDesc}}{{end}}" />
     <meta name="twitter:description" content="{{ if .Description }}{{.Description}} {{ else }}{{.Site.Params.siteDesc}}{{end}}"/>
