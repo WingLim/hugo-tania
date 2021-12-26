@@ -21,6 +21,14 @@ disqusShortname = "https-hugo-tania-netlify-app"
   siteDesc = "Hugo is Absurdly Fast!"
   author = "Hugo Tania"
 
+  [params.colorScheme]
+    # Enable toggle colorScheme
+    # Default to true
+    toggle = true
+    # Default colorScheme
+    # Default to auto
+    default = auto
+
   # Limit how many categories filter show above search input.
   # Default to 5
   maxCategoryToShow = 10

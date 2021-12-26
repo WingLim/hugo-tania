@@ -21,6 +21,13 @@ params:
   siteDesc: "Hugo is Absurdly Fast!"
   author: "Hugo Tania"
 
+  colorScheme:
+    # Enable toggle colorScheme
+    # Default to true
+    toggle: true
+    # Default colorScheme
+    # Default to auto
+    default: auto
 
   # Limit how many categories filter show above search input.
   # Default to 5
