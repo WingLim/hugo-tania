@@ -6,7 +6,7 @@
             {{ end }}
         </nav>
 
-        {{ partialCached "footer/custom" . }}
+        {{ partial "footer/custom" . }}
     </section>
     {{- if and (or .Params.mathjax (and .Site.Params.mathjax (ne .Params.mathjax false))) (or .IsPage .IsHome) }}
     <script type="text/javascript">
