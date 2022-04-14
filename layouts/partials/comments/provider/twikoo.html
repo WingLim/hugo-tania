@@ -1,0 +1,11 @@
+<div id="tcomment"></div>
+<script src="https://cdn.jsdelivr.net/npm/twikoo@1.4.15/dist/twikoo.all.min.js"></script>
+<script>
+twikoo.init({
+  envId: '{{ .Site.Params.comments.twikoo.id }}',
+  el: '#tcomment',
+  region: '{{ .Site.Params.comments.twikoo.region | default "ap-shanghai" }}',
+  path: '{{ .Site.Params.comments.twikoo.path | default "window.location.pathname" }}',
+  lang: '{{ .Site.Params.comments.twikoo.lang | default "zh-CN" }}',
+})
+</script>
