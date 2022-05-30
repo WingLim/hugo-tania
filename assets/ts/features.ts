@@ -1,6 +1,6 @@
-import ThemeColorScheme from "ts/colorScheme"
-import { renderCopyButton } from "ts/copyButton"
-import { renderFootnotes } from "ts/footnotes"
+import ThemeColorScheme from "./colorScheme"
+import { renderCopyButton } from "./copyButton"
+import { renderFootnotes } from "./footnotes"
 
 let enableFootnotes = false
 if (document.currentScript) {
