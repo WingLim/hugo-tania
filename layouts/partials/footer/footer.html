@@ -34,7 +34,7 @@
             );"></script>
     {{- end }}
     {{- $opts := dict "minify" hugo.IsProduction -}}
-    {{ $features := resources.Get "ts/features.ts" | js.Build $opts | fingerprint }}
+    {{ $features := resources.Get "ts/features.ts" | js.Build $opts | fingerprint | minify }}
     <script defer src="{{ $features.RelPermalink }}" 
     data-enable-footnotes="{{ .Site.Params.enableFootnotes | default true }}"
     ></script>
