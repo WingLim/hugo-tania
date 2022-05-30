@@ -1,0 +1,22 @@
+{
+  "name": "hugo-tania",
+  "version": "1.0.0",
+  "description": "[![Netlify Status](https://api.netlify.com/api/v1/badges/bae5db51-7cc6-41e2-9615-029ade8aa264/deploy-status)](https://app.netlify.com/sites/hugo-tania/deploys)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WingLim/hugo-tania.git"
+  },
+  "author": "WingLim",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/WingLim/hugo-tania/issues"
+  },
+  "homepage": "https://github.com/WingLim/hugo-tania#readme",
+  "dependencies": {
+    "fuse.js": "^6.6.2"
+  }
+}
