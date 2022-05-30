@@ -60,6 +60,11 @@ EOF
 
 Edit your site config following [exampleSite/config.yaml](https://github.com/WingLim/hugo-tania/blob/main/exampleSite/config.yaml).
 
+
+
+## [hugo contact form](https://fabform.io/a/hugo-contact-form)
+
+
 ## Thanks to
 
 - [hugo-theme-stack](https://github.com/CaiJimmy/hugo-theme-stack) for dark mode switch
