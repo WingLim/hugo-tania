@@ -1,28 +1,22 @@
-// This file is copy from https://github.com/CaiJimmy/hugo-theme-stack/blob/24915a912f23e8c0a21aa156714ea7f071469fdb/assets/ts/main.ts#L61-L87
+// This file is copy from https://github.com/CaiJimmy/hugo-theme-stack/blob/c1fcec95a64c6787cd08ed9f5194306642058b7a/assets/ts/main.ts#L65-L92
 // All right reserved by Jimmy Cai
 
-const codeBlocks = document.querySelectorAll('.article-post .highlight');
+const highlights = document.querySelectorAll('.article-post div.highlight');
 const copyText = `Copy`,
     copiedText = `Copied!`;
 
 export let renderCopyButton = function() {
-    codeBlocks.forEach(codeBlock => {
+    highlights.forEach(highlight => {
         const copyButton = document.createElement('button')
         copyButton.innerHTML = copyText
         copyButton.classList.add('copyCodeButton');
-        codeBlock.appendChild(copyButton);
+        highlight.appendChild(copyButton);
 
-        const pre = codeBlock.getElementsByTagName('pre');
-        // This theme's code block has line number, so the second is where the
-        // real code locate
-        let codeIndex = 0
-        if (pre.length == 2) {
-            codeIndex = 1
-        }
-        const code = pre[codeIndex].textContent;
+        const codeBlock = highlight.querySelector('code[data-lang]');
+        if (!codeBlock) return;
 
         copyButton.addEventListener('click', () => {
-            navigator.clipboard.writeText(code)
+            navigator.clipboard.writeText(codeBlock.textContent)
                 .then(() => {
                     copyButton.textContent = copiedText;
 
