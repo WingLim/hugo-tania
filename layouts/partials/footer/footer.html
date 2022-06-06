@@ -36,6 +36,6 @@
     {{- $opts := dict "minify" hugo.IsProduction -}}
     {{ $features := resources.Get "ts/features.ts" | js.Build $opts | fingerprint }}
     <script defer src="{{ $features.RelPermalink }}" 
-    data-enable-footnotes="{{ .Site.Params.enableFootnotes | default true }}"
+    data-enable-footnotes="{{ .Params.enableFootnotes | default true }}"
     ></script>
 </footer>
