@@ -27,7 +27,7 @@ disqusShortname = "https-hugo-tania-netlify-app"
     toggle = true
     # Default colorScheme
     # Default to auto
-    default = auto
+    default = "auto"
 
   # Limit how many categories filter show above search input.
   # Default to 5
